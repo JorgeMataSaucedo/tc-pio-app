@@ -1,0 +1,120 @@
+/**
+ * Estilos para Tab Bar - SPIO
+ * Navegación inferior con diseño premium
+ */
+
+// Tab Bar Container
+ion-tab-bar.spio-tab-bar {
+  --background: rgba(255, 255, 255, 0.95);
+  --border: none;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  height: auto;
+  padding-top: 8px;
+  padding-bottom: calc(env(safe-area-inset-bottom, 8px) + 8px);
+
+  contain: none !important;
+  overflow: visible !important;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+// Tab Buttons
+ion-tab-button {
+  --color: var(--spio-text-secondary);
+  --color-selected: var(--ion-color-primary);
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+
+  min-height: 56px;
+  max-height: 56px;
+  height: 56px;
+
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+
+  contain: none !important;
+  overflow: visible !important;
+
+  padding: 6px 4px !important;
+
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  // Indicador superior (solo visible cuando está activo)
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 40px;
+    height: 3px;
+    background: var(--ion-color-primary);
+    border-radius: 0 0 3px 3px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  // Icon
+  ion-icon {
+    font-size: 24px !important;
+    width: 24px;
+    height: 24px;
+    margin: 0 !important;
+    margin-bottom: 3px !important;
+    display: block !important;
+    flex-shrink: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  // Label
+  ion-label {
+    font-size: 10px !important;
+    font-weight: 600 !important;
+    margin: 0 !important;
+    margin-top: 2px !important;
+    display: block !important;
+    white-space: nowrap;
+    line-height: 1.2;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  // Hover effect (para web)
+  &:hover {
+    background: rgba(183, 28, 28, 0.05);
+
+    ion-icon {
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// Tab activo
+ion-tab-button[aria-selected="true"] {
+
+  // Mostrar indicador superior
+  &::before {
+    transform: translateX(-50%) scaleX(1);
+  }
+
+  ion-icon {
+    color: var(--ion-color-primary) !important;
+    transform: scale(1.1);
+  }
+
+  ion-label {
+    color: var(--ion-color-primary) !important;
+    font-weight: 700 !important;
+  }
+}
+
+// Ripple effect personalizado
+ion-tab-button::part(native) {
+  transition: background 0.3s ease;
+}

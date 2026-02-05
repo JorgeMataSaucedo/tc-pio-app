@@ -1,0 +1,192 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <div class="header-content">
+      <!-- Saludo y avatar -->
+      <div class="header-left">
+        <ion-avatar class="user-avatar" (click)="navigateTo('/tabs/profile')">
+          <img [src]="operatorAvatar()" alt="Avatar" />
+        </ion-avatar>
+        <div class="greeting-container">
+          <span class="greeting-text">{{ greeting() }},</span>
+          <span class="user-name">{{ operatorName() }}</span>
+        </div>
+      </div>
+
+      <!-- Botón de notificaciones -->
+      <ion-button fill="clear" class="notification-btn" (click)="openNotifications()">
+        <ion-icon name="notifications-outline" slot="icon-only"></ion-icon>
+        @if (unreadAlerts() > 0) {
+          <ion-badge color="danger" class="notification-badge">{{ unreadAlerts() }}</ion-badge>
+        }
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="dashboard-content">
+  <!-- Pull to refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Tira para actualizar"
+      refreshingSpinner="crescent"
+      refreshingText="Actualizando..."
+    ></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Loading skeleton -->
+  @if (isLoading()) {
+    <div class="skeleton-container">
+      <!-- Hero skeleton -->
+      <ion-card class="hero-card-skeleton">
+        <ion-card-content>
+          <ion-skeleton-text [animated]="true" style="width: 60%; height: 24px;"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="width: 40%; height: 48px; margin-top: 12px;"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="width: 100%; height: 8px; margin-top: 16px;"></ion-skeleton-text>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- KPIs skeleton -->
+      <ion-grid class="kpi-grid">
+        <ion-row>
+          @for (i of [1, 2, 3, 4]; track i) {
+            <ion-col size="6">
+              <ion-card class="kpi-card-skeleton">
+                <ion-card-content>
+                  <ion-skeleton-text [animated]="true" style="width: 40px; height: 40px; border-radius: 50%;"></ion-skeleton-text>
+                  <ion-skeleton-text [animated]="true" style="width: 80%; height: 20px; margin-top: 8px;"></ion-skeleton-text>
+                  <ion-skeleton-text [animated]="true" style="width: 60%; height: 14px; margin-top: 4px;"></ion-skeleton-text>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          }
+        </ion-row>
+      </ion-grid>
+    </div>
+  } @else {
+    <!-- ========================================== -->
+    <!-- HERO CARD - GAMIFICACIÓN -->
+    <!-- ========================================== -->
+    <ion-card class="hero-card" [ngClass]="levelGradientClass()">
+      <ion-card-content class="hero-content">
+        <!-- Nivel y badge -->
+        <div class="hero-header">
+          <div class="level-badge">
+            <ion-icon name="ribbon-outline"></ion-icon>
+            <span>{{ gamification()?.levelDisplayName }}</span>
+          </div>
+          <ion-chip class="ranking-chip" (click)="viewAchievements()">
+            <ion-icon name="trophy-outline"></ion-icon>
+            <ion-label>#{{ gamification()?.rankingPosition }} de {{ gamification()?.totalOperators }}</ion-label>
+          </ion-chip>
+        </div>
+
+        <!-- Puntos disponibles -->
+        <div class="points-container">
+          <span class="points-label">Puntos disponibles</span>
+          <div class="points-value">
+            <span class="points-number">{{ gamification()?.availablePoints | number:'1.0-0':'es-MX' }}</span>
+            <span class="points-suffix">pts</span>
+          </div>
+        </div>
+
+        <!-- Barra de progreso al siguiente nivel -->
+        <div class="progress-container">
+          <div class="progress-header">
+            <span class="progress-label">Progreso a {{ gamification()?.nextLevelName }}</span>
+            <span class="progress-percent">{{ gamification()?.progressPercent }}%</span>
+          </div>
+          <ion-progress-bar 
+            [value]="(gamification()?.progressPercent ?? 0) / 100"
+            class="level-progress"
+          ></ion-progress-bar>
+          <span class="points-to-next">
+            Faltan <strong>{{ gamification()?.pointsToNextLevel | number:'1.0-0':'es-MX' }}</strong> puntos
+          </span>
+        </div>
+
+        <!-- Stats de racha -->
+        <div class="streak-container">
+          <ion-icon name="flame-outline" class="streak-icon"></ion-icon>
+          <span class="streak-text">{{ gamification()?.currentStreak }} días de racha activa</span>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- ========================================== -->
+    <!-- SECCIÓN DE KPIs -->
+    <!-- ========================================== -->
+    <div class="section-header">
+      <h2 class="section-title">Mis Indicadores</h2>
+      <span class="section-subtitle">Este mes</span>
+    </div>
+
+    <ion-grid class="kpi-grid">
+      <ion-row>
+        @for (kpi of kpiCards; track kpi.id) {
+          <ion-col size="6">
+            <ion-card class="kpi-card" button="true" (click)="navigateTo('/tabs/stats')">
+              <ion-card-content class="kpi-content">
+                <div class="kpi-icon-container" [attr.data-color]="kpi.iconColor">
+                  <ion-icon [name]="kpi.icon"></ion-icon>
+                </div>
+                <div class="kpi-value">
+                  {{ formatKpiValue(getKpiValue(kpi.kpiKey), kpi.format) }}
+                  <span class="kpi-unit">{{ getKpiUnit(kpi.kpiKey) }}</span>
+                </div>
+                <div class="kpi-title">{{ kpi.title }}</div>
+                <div 
+                  class="kpi-variation" 
+                  [class.positive]="isPositiveTrend(kpi.kpiKey)"
+                  [class.negative]="!isPositiveTrend(kpi.kpiKey)"
+                >
+                  <ion-icon 
+                    [name]="isPositiveTrend(kpi.kpiKey) ? 'trending-up-outline' : 'trending-down-outline'"
+                  ></ion-icon>
+                  <span>{{ getKpiVariation(kpi.kpiKey) > 0 ? '+' : '' }}{{ getKpiVariation(kpi.kpiKey) | number:'1.1-1' }}%</span>
+                </div>
+              </ion-card-content>
+              <ion-ripple-effect></ion-ripple-effect>
+            </ion-card>
+          </ion-col>
+        }
+      </ion-row>
+    </ion-grid>
+
+    <!-- ========================================== -->
+    <!-- ACCESOS DIRECTOS -->
+    <!-- ========================================== -->
+    <div class="section-header">
+      <h2 class="section-title">Acceso Rápido</h2>
+    </div>
+
+    <div class="quick-actions-container">
+      @for (action of quickActions; track action.id) {
+        <ion-card 
+          class="quick-action-card" 
+          [attr.data-color]="action.color"
+          button="true"
+          (click)="navigateTo(action.route)"
+        >
+          <ion-card-content class="quick-action-content">
+            <div class="action-icon-container">
+              <ion-icon [name]="action.icon"></ion-icon>
+              @if (action.hasBadge && action.badgeCount) {
+                <ion-badge color="danger" class="action-badge">{{ action.badgeCount }}</ion-badge>
+              }
+            </div>
+            <div class="action-text">
+              <span class="action-title">{{ action.title }}</span>
+              <span class="action-subtitle">{{ action.subtitle }}</span>
+            </div>
+            <ion-icon name="chevron-forward-outline" class="action-arrow"></ion-icon>
+          </ion-card-content>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-card>
+      }
+    </div>
+
+    <!-- Espacio inferior para el tab bar -->
+    <div class="bottom-spacer"></div>
+  }
+</ion-content>

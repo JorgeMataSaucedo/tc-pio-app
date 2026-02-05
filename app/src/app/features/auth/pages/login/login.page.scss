@@ -1,0 +1,390 @@
+/**
+ * Estilos de Login - SPIO
+ * Transportes Cuauhtémoc
+ * 
+ * Diseño: Estilo corporativo con fondo de tractocamión y overlay oscuro
+ */
+
+// ============================================
+// CONTENEDOR PRINCIPAL
+// ============================================
+
+.login-content {
+  --background: transparent;
+}
+
+.login-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/assets/images/bg-truck.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  // Fallback si no hay imagen
+  background-color: #1a1a2e;
+  
+  // Animación sutil de zoom
+  animation: subtleZoom 30s ease-in-out infinite alternate;
+}
+
+@keyframes subtleZoom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+.login-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.7) 50%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+}
+
+.login-container {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  padding: var(--spio-spacing-lg);
+  padding-top: env(safe-area-inset-top, 20px);
+  padding-bottom: env(safe-area-inset-bottom, 20px);
+}
+
+// ============================================
+// HEADER - LOGO Y TÍTULO
+// ============================================
+
+.login-header {
+  text-align: center;
+  margin-bottom: var(--spio-spacing-xl);
+}
+
+.logo-container {
+  width: 130px;
+  height: 130px;
+  margin: 0 auto var(--spio-spacing-md);
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  padding: 0;
+  backdrop-filter: blur(12px);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 0 30px rgba(255, 255, 255, 0.05);
+  animation: logoFloat 4s ease-in-out infinite;
+  overflow: hidden;
+}
+
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.company-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  // Ya no necesitamos el filtro porque el SVG ya es blanco
+}
+
+.app-title {
+  font-size: 48px;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0 0 var(--spio-spacing-xs);
+  letter-spacing: 6px;
+  text-shadow: 
+    0 2px 10px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(183, 28, 28, 0.3);
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFB300 50%, #FFFFFF 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmerText 3s linear infinite;
+}
+
+@keyframes shimmerText {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.app-subtitle {
+  font-size: var(--spio-font-size-sm);
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+// ============================================
+// FORMULARIO
+// ============================================
+
+.login-form {
+  width: 100%;
+  max-width: 380px;
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: var(--spio-border-radius-lg);
+  padding: var(--spio-spacing-lg);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.form-field {
+  margin-bottom: var(--spio-spacing-md);
+}
+
+// ============================================
+// INPUTS
+// ============================================
+
+.login-input {
+  --background: var(--spio-background-secondary);
+  --border-radius: var(--spio-border-radius-sm);
+  --padding-start: var(--spio-spacing-md);
+  --padding-end: var(--spio-spacing-md);
+  --min-height: 56px;
+  --highlight-color-focused: var(--ion-color-primary);
+  --highlight-color-valid: var(--ion-color-success);
+  --highlight-color-invalid: var(--ion-color-danger);
+  
+  border-radius: var(--spio-border-radius-sm);
+  overflow: hidden;
+  transition: all var(--spio-transition-fast);
+  
+  &:focus-within {
+    box-shadow: 0 0 0 2px var(--ion-color-primary);
+  }
+  
+  &.input-error {
+    box-shadow: 0 0 0 2px var(--ion-color-danger);
+  }
+  
+  .input-icon {
+    color: var(--spio-text-secondary);
+    font-size: 20px;
+    margin-right: var(--spio-spacing-sm);
+  }
+  
+  ion-input {
+    --color: var(--spio-text-primary);
+    --placeholder-color: var(--spio-text-muted);
+    font-size: var(--spio-font-size-md);
+  }
+}
+
+.password-toggle {
+  --color: var(--spio-text-secondary);
+  --padding-start: 8px;
+  --padding-end: 8px;
+  
+  ion-icon {
+    font-size: 20px;
+  }
+}
+
+.error-message {
+  display: block;
+  margin-top: var(--spio-spacing-xs);
+  padding-left: var(--spio-spacing-sm);
+  
+  small {
+    font-size: var(--spio-font-size-xs);
+  }
+}
+
+// ============================================
+// RECORDAR SESIÓN
+// ============================================
+
+.remember-me {
+  margin: var(--spio-spacing-md) 0;
+}
+
+.remember-checkbox {
+  --size: 20px;
+  --checkbox-background-checked: var(--ion-color-primary);
+  --border-color: var(--spio-text-muted);
+  --border-color-checked: var(--ion-color-primary);
+  
+  .remember-label {
+    color: var(--spio-text-secondary);
+    font-size: var(--spio-font-size-sm);
+    margin-left: var(--spio-spacing-sm);
+  }
+}
+
+// ============================================
+// BOTÓN DE LOGIN
+// ============================================
+
+.login-button {
+  margin-top: var(--spio-spacing-lg);
+  --background: var(--ion-color-primary);
+  --background-activated: var(--ion-color-primary-dark);
+  --background-hover: var(--ion-color-primary-shade);
+  --border-radius: var(--spio-border-radius-sm);
+  --box-shadow: 0 4px 12px rgba(183, 28, 28, 0.4);
+  height: 52px;
+  font-size: var(--spio-font-size-md);
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0.5px;
+  
+  &:disabled {
+    --background: var(--spio-text-muted);
+    --box-shadow: none;
+    opacity: 0.8;
+  }
+  
+  ion-icon {
+    font-size: 22px;
+    margin-right: var(--spio-spacing-sm);
+  }
+  
+  .button-spinner {
+    width: 20px;
+    height: 20px;
+    margin-right: var(--spio-spacing-sm);
+  }
+}
+
+// ============================================
+// SECCIÓN DE AYUDA
+// ============================================
+
+.help-section {
+  margin-top: var(--spio-spacing-md);
+  text-align: center;
+}
+
+.help-button {
+  --color: var(--spio-text-secondary);
+  font-size: var(--spio-font-size-xs);
+  text-transform: none;
+  
+  &:hover {
+    --color: var(--ion-color-primary);
+  }
+  
+  ion-icon {
+    font-size: 16px;
+  }
+}
+
+// ============================================
+// FOOTER
+// ============================================
+
+.login-footer {
+  margin-top: var(--spio-spacing-xl);
+  text-align: center;
+  
+  .copyright {
+    font-size: var(--spio-font-size-xs);
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0 0 var(--spio-spacing-xs);
+  }
+  
+  .version {
+    font-size: var(--spio-font-size-xs);
+    color: rgba(255, 255, 255, 0.4);
+    margin: 0;
+  }
+}
+
+// ============================================
+// ANIMACIONES
+// ============================================
+
+.animate-slide-up {
+  animation: slideUpFade 0.6s ease-out forwards;
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Delay para el formulario
+.login-form.animate-slide-up {
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
+// ============================================
+// RESPONSIVE
+// ============================================
+
+@media (min-width: 768px) {
+  .login-container {
+    padding: var(--spio-spacing-xl);
+  }
+  
+  .logo-container {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .company-logo {
+    width: 100px;
+  }
+  
+  .app-title {
+    font-size: 52px;
+  }
+  
+  .login-form {
+    padding: var(--spio-spacing-xl);
+    max-width: 420px;
+  }
+}
+
+// ============================================
+// ESTILOS PARA LOADING Y TOAST (GLOBALES)
+// ============================================
+
+// Estos estilos se aplicarán globalmente cuando el componente se use
+:host {
+  display: block;
+  height: 100%;
+}

@@ -1,0 +1,170 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title>Mi Wallet</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleBalanceVisibility()">
+        <ion-icon [name]="showBalance() ? 'eye-outline' : 'eye-off-outline'" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="wallet-content">
+  <!-- Pull to refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Tira para actualizar"
+      refreshingSpinner="crescent"
+    ></ion-refresher-content>
+  </ion-refresher>
+
+  @if (isLoading()) {
+    <!-- Skeleton Loading -->
+    <div class="skeleton-container">
+      <div class="balance-card-skeleton">
+        <ion-skeleton-text [animated]="true" style="width: 40%; height: 16px;"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: 70%; height: 48px; margin-top: 8px;"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: 50%; height: 14px; margin-top: 8px;"></ion-skeleton-text>
+      </div>
+    </div>
+  } @else {
+    <!-- ========================================== -->
+    <!-- BALANCE CARD -->
+    <!-- ========================================== -->
+    <div class="balance-section">
+      <ion-card class="balance-card">
+        <ion-card-content>
+          <!-- Saldo Principal -->
+          <div class="balance-header">
+            <span class="balance-label">Saldo Disponible</span>
+            <ion-chip class="pending-chip" *ngIf="walletSummary()?.pendingPoints">
+              <ion-icon name="time-outline"></ion-icon>
+              <ion-label>{{ walletSummary()?.pendingPoints | number:'1.0-0' }} pendientes</ion-label>
+            </ion-chip>
+          </div>
+
+          <div class="balance-main">
+            @if (showBalance()) {
+              <span class="balance-points">{{ formattedBalance() }}</span>
+              <span class="balance-currency">pts SPIO</span>
+            } @else {
+              <span class="balance-points balance-hidden">• • • • •</span>
+              <span class="balance-currency">pts SPIO</span>
+            }
+          </div>
+
+          <div class="balance-equivalent">
+            @if (showBalance()) {
+              <ion-icon name="swap-horizontal-outline"></ion-icon>
+              <span>Equivalente a <strong>${{ equivalentMxn() }} MXN</strong></span>
+            } @else {
+              <ion-icon name="swap-horizontal-outline"></ion-icon>
+              <span>Equivalente a <strong>$••••• MXN</strong></span>
+            }
+          </div>
+
+          <!-- Stats Row -->
+          <div class="balance-stats">
+            <div class="stat-item">
+              <ion-icon name="trending-up-outline" color="success"></ion-icon>
+              <div class="stat-content">
+                <span class="stat-value">{{ walletSummary()?.totalPoints | number:'1.0-0' }}</span>
+                <span class="stat-label">Acumulados</span>
+              </div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <ion-icon name="gift-outline" color="primary"></ion-icon>
+              <div class="stat-content">
+                <span class="stat-value">{{ walletSummary()?.redeemedPoints | number:'1.0-0' }}</span>
+                <span class="stat-label">Canjeados</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Botón Canjear -->
+          <ion-button expand="block" class="redeem-button" (click)="goToRedeem()">
+            <ion-icon name="cash-outline" slot="start"></ion-icon>
+            Canjear Puntos
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- HISTORIAL DE TRANSACCIONES -->
+    <!-- ========================================== -->
+    <div class="transactions-section">
+      <div class="section-header">
+        <h2 class="section-title">Historial</h2>
+      </div>
+
+      <!-- Filtros -->
+      <ion-segment [value]="selectedFilter()" (ionChange)="onFilterChange($event)" class="filter-segment">
+        <ion-segment-button value="all">
+          <ion-label>Todos</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="income">
+          <ion-label>Ingresos</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="expense">
+          <ion-label>Egresos</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+      <!-- Lista de Transacciones -->
+      <ion-list class="transactions-list" lines="none">
+        @for (transaction of filteredTransactions(); track transaction.id) {
+          <ion-item-sliding>
+            <ion-item class="transaction-item" detail="false">
+              <div class="transaction-icon" [class.income]="isIncome(transaction)" [class.expense]="!isIncome(transaction)" slot="start">
+                <ion-icon [name]="transaction.icon"></ion-icon>
+              </div>
+              
+              <ion-label>
+                <h3 class="transaction-title">{{ transaction.description }}</h3>
+                <p class="transaction-reference">{{ transaction.reference }}</p>
+                <p class="transaction-date">{{ formatTransactionDate(transaction.transactionDate) }}</p>
+              </ion-label>
+
+              <div class="transaction-amount" slot="end">
+                <span 
+                  class="amount-value"
+                  [class.income]="isIncome(transaction)"
+                  [class.expense]="!isIncome(transaction)"
+                >
+                  {{ isIncome(transaction) ? '+' : '' }}{{ transaction.amount | number:'1.0-0' }}
+                </span>
+                <span class="amount-label">pts</span>
+                @if (transaction.status === 'PENDING') {
+                  <ion-badge color="warning" class="status-badge">Pendiente</ion-badge>
+                }
+              </div>
+            </ion-item>
+
+            <ion-item-options side="end">
+              <ion-item-option color="primary">
+                <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        } @empty {
+          <div class="empty-state">
+            <ion-icon name="wallet-outline"></ion-icon>
+            <p>No hay transacciones</p>
+          </div>
+        }
+      </ion-list>
+
+      <!-- Infinite Scroll -->
+      <ion-infinite-scroll (ionInfinite)="loadMore($event)" [disabled]="!hasMoreData()">
+        <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Cargando más...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+
+    <!-- Espacio inferior -->
+    <div class="bottom-spacer"></div>
+  }
+</ion-content>

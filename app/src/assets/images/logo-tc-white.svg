@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <!-- Glow effect para versi�n sobre fondo oscuro -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- C�rculo de fondo semi-transparente -->
+  <circle cx="100" cy="100" r="95" fill="rgba(255,255,255,0.1)"/>
+  
+  <!-- Borde exterior -->
+  <circle cx="100" cy="100" r="95" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+  
+  <!-- Borde interior decorativo -->
+  <circle cx="100" cy="100" r="85" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+  
+  <!-- Tractocami�n estilizado (silueta muy sutil) -->
+  <g fill="rgba(255,255,255,0.08)">
+    <path d="M45 130 L45 95 Q45 85 55 85 L90 85 L90 130 Z"/>
+    <rect x="90" y="90" width="70" height="40" rx="3"/>
+    <circle cx="60" cy="135" r="10"/>
+    <circle cx="115" cy="135" r="10"/>
+    <circle cx="145" cy="135" r="10"/>
+  </g>
+  
+  <!-- Letras TC prominentes con glow -->
+  <text x="100" y="95" font-family="'Segoe UI', Arial, sans-serif" font-size="72" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="-2" filter="url(#glow)">TC</text>
+  
+  <!-- L�nea decorativa -->
+  <rect x="55" y="108" width="90" height="3" rx="1.5" fill="rgba(255,255,255,0.6)"/>
+  
+  <!-- Texto empresa -->
+  <text x="100" y="130" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="600" fill="rgba(255,255,255,0.9)" text-anchor="middle" letter-spacing="2">TRANSPORTES</text>
+  <text x="100" y="145" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="600" fill="rgba(255,255,255,0.9)" text-anchor="middle" letter-spacing="2">CUAUHT�MOC</text>
+</svg>

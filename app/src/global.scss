@@ -1,0 +1,252 @@
+/**
+ * SPIO - Estilos Globales
+ * Transportes Cuauhtémoc
+ */
+
+// Importar animaciones premium
+@import 'app/shared/styles/animations';
+
+// Importar Ionic
+@import '@ionic/angular/css/core.css';
+@import '@ionic/angular/css/normalize.css';
+@import '@ionic/angular/css/structure.css';
+@import '@ionic/angular/css/typography.css';
+@import '@ionic/angular/css/display.css';
+
+// Ionic Utilities
+@import '@ionic/angular/css/padding.css';
+@import '@ionic/angular/css/float-elements.css';
+@import '@ionic/angular/css/text-alignment.css';
+@import '@ionic/angular/css/text-transformation.css';
+@import '@ionic/angular/css/flex-utils.css';
+
+// ============================================
+// UTILIDADES GLOBALES SPIO
+// ============================================
+
+// Textos
+.text-primary { color: var(--ion-color-primary) !important; }
+.text-secondary { color: var(--spio-text-secondary) !important; }
+.text-muted { color: var(--spio-text-muted) !important; }
+.text-success { color: var(--ion-color-success) !important; }
+.text-danger { color: var(--ion-color-danger) !important; }
+.text-gold { color: var(--ion-color-gold) !important; }
+.text-white { color: #FFFFFF !important; }
+
+// Fondos
+.bg-primary { background-color: var(--ion-color-primary) !important; }
+.bg-light { background-color: var(--spio-background-secondary) !important; }
+.bg-white { background-color: #FFFFFF !important; }
+.bg-dark { background-color: var(--spio-background-dark) !important; }
+
+// Tipografía
+.font-bold { font-weight: 700 !important; }
+.font-semibold { font-weight: 600 !important; }
+.font-medium { font-weight: 500 !important; }
+.font-normal { font-weight: 400 !important; }
+
+.text-xs { font-size: var(--spio-font-size-xs) !important; }
+.text-sm { font-size: var(--spio-font-size-sm) !important; }
+.text-md { font-size: var(--spio-font-size-md) !important; }
+.text-lg { font-size: var(--spio-font-size-lg) !important; }
+.text-xl { font-size: var(--spio-font-size-xl) !important; }
+.text-xxl { font-size: var(--spio-font-size-xxl) !important; }
+
+// Sombras
+.shadow-sm { box-shadow: var(--spio-shadow-sm) !important; }
+.shadow-md { box-shadow: var(--spio-shadow-md) !important; }
+.shadow-lg { box-shadow: var(--spio-shadow-lg) !important; }
+
+// Bordes redondeados
+.rounded-sm { border-radius: var(--spio-border-radius-sm) !important; }
+.rounded { border-radius: var(--spio-border-radius) !important; }
+.rounded-lg { border-radius: var(--spio-border-radius-lg) !important; }
+.rounded-full { border-radius: 50% !important; }
+
+// ============================================
+// ESTADOS DE DOCUMENTOS (SEMÁFORO)
+// ============================================
+
+.status-ok {
+  border-left: 5px solid var(--spio-status-ok) !important;
+}
+
+.status-warning {
+  border-left: 5px solid var(--spio-status-warning) !important;
+}
+
+.status-expired {
+  border-left: 5px solid var(--spio-status-expired) !important;
+}
+
+// ============================================
+// WALLET - TRANSACCIONES
+// ============================================
+
+.transaction-income {
+  color: var(--spio-income) !important;
+}
+
+.transaction-expense {
+  color: var(--spio-expense) !important;
+}
+
+// ============================================
+// COMPONENTES PERSONALIZADOS
+// ============================================
+
+// Cards con estilo corporativo
+ion-card.spio-card {
+  border-radius: var(--spio-border-radius);
+  box-shadow: var(--spio-shadow-md);
+  margin: var(--spio-spacing-md);
+  
+  ion-card-header {
+    padding-bottom: var(--spio-spacing-sm);
+  }
+  
+  ion-card-content {
+    padding-top: var(--spio-spacing-sm);
+  }
+}
+
+// Botón primario full-width
+ion-button.spio-btn-primary {
+  --border-radius: var(--spio-border-radius-sm);
+  --box-shadow: var(--spio-shadow-sm);
+  height: 48px;
+  font-weight: 600;
+  font-size: var(--spio-font-size-md);
+  text-transform: none;
+  letter-spacing: 0.5px;
+  
+  &:hover {
+    --background: var(--ion-color-primary-dark);
+  }
+}
+
+// Items de lista mejorados
+ion-item.spio-item {
+  --padding-start: var(--spio-spacing-md);
+  --padding-end: var(--spio-spacing-md);
+  --inner-padding-end: 0;
+  --background: transparent;
+  
+  &.spio-item-card {
+    --background: #FFFFFF;
+    border-radius: var(--spio-border-radius-sm);
+    margin-bottom: var(--spio-spacing-sm);
+    box-shadow: var(--spio-shadow-sm);
+  }
+}
+
+// Avatar circular
+.spio-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--ion-color-primary);
+  
+  &.spio-avatar-lg {
+    width: 80px;
+    height: 80px;
+    border-width: 3px;
+  }
+  
+  &.spio-avatar-sm {
+    width: 32px;
+    height: 32px;
+    border-width: 1px;
+  }
+}
+
+// ============================================
+// GRADIENTES GAMIFICACIÓN
+// ============================================
+
+.gradient-gold {
+  background: linear-gradient(135deg, #FFB300 0%, #FF8F00 100%);
+}
+
+.gradient-silver {
+  background: linear-gradient(135deg, #9E9E9E 0%, #616161 100%);
+}
+
+.gradient-bronze {
+  background: linear-gradient(135deg, #8D6E63 0%, #5D4037 100%);
+}
+
+.gradient-primary {
+  background: linear-gradient(135deg, #B71C1C 0%, #7f0000 100%);
+}
+
+// ============================================
+// ANIMACIONES
+// ============================================
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn var(--spio-transition-normal) ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp var(--spio-transition-normal) ease-out;
+}
+
+// ============================================
+// RESPONSIVE UTILITIES
+// ============================================
+
+// Ocultar en móvil
+@media (max-width: 576px) {
+  .hide-mobile { display: none !important; }
+}
+
+// Ocultar en desktop
+@media (min-width: 577px) {
+  .hide-desktop { display: none !important; }
+}
+
+// ============================================
+// OVERLAY PARA FONDOS DE IMAGEN
+// ============================================
+
+.overlay-dark {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.6) 0%,
+      rgba(0, 0, 0, 0.8) 100%
+    );
+    z-index: 1;
+  }
+  
+  > * {
+    position: relative;
+    z-index: 2;
+  }
+}

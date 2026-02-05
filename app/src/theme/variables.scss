@@ -1,0 +1,214 @@
+/**
+ * SPIO - Transportes Cuauhtémoc
+ * Variables de tema corporativo
+ * 
+ * Paleta Oficial:
+ * - Rojo Institucional: #B71C1C (primary)
+ * - Blanco: #FFFFFF
+ * - Grises Neutros: #F5F5F5, #E0E0E0, #9E9E9E, #424242
+ * - Dorado Gamificación: #FFB300 (accent)
+ */
+
+:root {
+  // ============================================
+  // COLORES PRIMARIOS - TRANSPORTES CUAUHTÉMOC
+  // ============================================
+  
+  --ion-color-primary: #B71C1C;
+  --ion-color-primary-rgb: 183, 28, 28;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #a11919;
+  --ion-color-primary-tint: #be3333;
+
+  // Variante más oscura para hover/active states
+  --ion-color-primary-dark: #7f0000;
+  --ion-color-primary-light: #e53935;
+
+  // ============================================
+  // SECUNDARIO - GRISES CORPORATIVOS
+  // ============================================
+  
+  --ion-color-secondary: #424242;
+  --ion-color-secondary-rgb: 66, 66, 66;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #3a3a3a;
+  --ion-color-secondary-tint: #555555;
+
+  // ============================================
+  // TERCIARIO - GRIS MEDIO
+  // ============================================
+  
+  --ion-color-tertiary: #757575;
+  --ion-color-tertiary-rgb: 117, 117, 117;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #676767;
+  --ion-color-tertiary-tint: #838383;
+
+  // ============================================
+  // SUCCESS - VERDE PARA ESTADOS POSITIVOS
+  // ============================================
+  
+  --ion-color-success: #2E7D32;
+  --ion-color-success-rgb: 46, 125, 50;
+  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success-shade: #286e2c;
+  --ion-color-success-tint: #438a47;
+
+  // ============================================
+  // WARNING - DORADO GAMIFICACIÓN
+  // ============================================
+  
+  --ion-color-warning: #FFB300;
+  --ion-color-warning-rgb: 255, 179, 0;
+  --ion-color-warning-contrast: #000000;
+  --ion-color-warning-contrast-rgb: 0, 0, 0;
+  --ion-color-warning-shade: #e09e00;
+  --ion-color-warning-tint: #ffbb1a;
+
+  // ============================================
+  // DANGER - ROJO ALERTAS
+  // ============================================
+  
+  --ion-color-danger: #D32F2F;
+  --ion-color-danger-rgb: 211, 47, 47;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #ba2929;
+  --ion-color-danger-tint: #d74444;
+
+  // ============================================
+  // COLORES NEUTROS - UI
+  // ============================================
+  
+  --ion-color-light: #F5F5F5;
+  --ion-color-light-rgb: 245, 245, 245;
+  --ion-color-light-contrast: #000000;
+  --ion-color-light-contrast-rgb: 0, 0, 0;
+  --ion-color-light-shade: #d8d8d8;
+  --ion-color-light-tint: #f7f7f7;
+
+  --ion-color-medium: #9E9E9E;
+  --ion-color-medium-rgb: 158, 158, 158;
+  --ion-color-medium-contrast: #000000;
+  --ion-color-medium-contrast-rgb: 0, 0, 0;
+  --ion-color-medium-shade: #8b8b8b;
+  --ion-color-medium-tint: #a8a8a8;
+
+  --ion-color-dark: #212121;
+  --ion-color-dark-rgb: 33, 33, 33;
+  --ion-color-dark-contrast: #ffffff;
+  --ion-color-dark-contrast-rgb: 255, 255, 255;
+  --ion-color-dark-shade: #1d1d1d;
+  --ion-color-dark-tint: #373737;
+
+  // ============================================
+  // COLOR ESPECIAL - DORADO GAMIFICACIÓN
+  // ============================================
+  
+  --ion-color-gold: #FFB300;
+  --ion-color-gold-rgb: 255, 179, 0;
+  --ion-color-gold-contrast: #000000;
+  --ion-color-gold-contrast-rgb: 0, 0, 0;
+  --ion-color-gold-shade: #e09e00;
+  --ion-color-gold-tint: #ffbb1a;
+
+  // ============================================
+  // VARIABLES PERSONALIZADAS SPIO
+  // ============================================
+  
+  // Fondos
+  --spio-background-primary: #FFFFFF;
+  --spio-background-secondary: #F5F5F5;
+  --spio-background-dark: #212121;
+  
+  // Textos
+  --spio-text-primary: #212121;
+  --spio-text-secondary: #757575;
+  --spio-text-light: #FFFFFF;
+  --spio-text-muted: #9E9E9E;
+  
+  // Bordes
+  --spio-border-color: #E0E0E0;
+  --spio-border-radius: 12px;
+  --spio-border-radius-sm: 8px;
+  --spio-border-radius-lg: 16px;
+  
+  // Sombras
+  --spio-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
+  --spio-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --spio-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
+  
+  // Espaciado
+  --spio-spacing-xs: 4px;
+  --spio-spacing-sm: 8px;
+  --spio-spacing-md: 16px;
+  --spio-spacing-lg: 24px;
+  --spio-spacing-xl: 32px;
+  
+  // Transiciones
+  --spio-transition-fast: 150ms ease-in-out;
+  --spio-transition-normal: 300ms ease-in-out;
+  
+  // Tipografía
+  --spio-font-size-xs: 12px;
+  --spio-font-size-sm: 14px;
+  --spio-font-size-md: 16px;
+  --spio-font-size-lg: 20px;
+  --spio-font-size-xl: 24px;
+  --spio-font-size-xxl: 32px;
+  
+  // Estados de documentos (semáforo)
+  --spio-status-ok: #2E7D32;
+  --spio-status-warning: #F57C00;
+  --spio-status-expired: #D32F2F;
+  
+  // Wallet - Ingresos/Egresos
+  --spio-income: #2E7D32;
+  --spio-expense: #D32F2F;
+}
+
+// ============================================
+// CLASE PARA COLOR GOLD (GAMIFICACIÓN)
+// ============================================
+
+.ion-color-gold {
+  --ion-color-base: var(--ion-color-gold);
+  --ion-color-base-rgb: var(--ion-color-gold-rgb);
+  --ion-color-contrast: var(--ion-color-gold-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-gold-contrast-rgb);
+  --ion-color-shade: var(--ion-color-gold-shade);
+  --ion-color-tint: var(--ion-color-gold-tint);
+}
+
+// ============================================
+// CONFIGURACIÓN GLOBAL DE IONIC
+// ============================================
+
+:root {
+  --ion-font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
+  
+  // Toolbar
+  --ion-toolbar-background: var(--ion-color-primary);
+  --ion-toolbar-color: var(--ion-color-primary-contrast);
+  
+  // Cards
+  --ion-card-background: #FFFFFF;
+  
+  // Items
+  --ion-item-background: transparent;
+}
+
+// ============================================
+// MODO OSCURO (Futuro)
+// ============================================
+
+@media (prefers-color-scheme: dark) {
+  /*
+   * Dark Mode deshabilitado por ahora.
+   * Descomentar cuando se implemente soporte dark mode.
+   */
+}

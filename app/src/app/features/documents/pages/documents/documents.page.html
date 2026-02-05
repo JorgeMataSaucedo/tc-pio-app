@@ -1,0 +1,162 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title>Mis Documentos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="documents-content">
+  <!-- Pull to refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Tira para actualizar"
+      refreshingSpinner="crescent"
+    ></ion-refresher-content>
+  </ion-refresher>
+
+  @if (isLoading()) {
+    <!-- Skeleton Loading -->
+    <div class="skeleton-container">
+      <div class="summary-skeleton">
+        <ion-skeleton-text [animated]="true" style="width: 100%; height: 120px; border-radius: 12px;"></ion-skeleton-text>
+      </div>
+      @for (i of [1, 2, 3]; track i) {
+        <div class="doc-skeleton">
+          <ion-skeleton-text [animated]="true" style="width: 100%; height: 80px; border-radius: 12px;"></ion-skeleton-text>
+        </div>
+      }
+    </div>
+  } @else {
+    <!-- ========================================== -->
+    <!-- RESUMEN DE DOCUMENTOS -->
+    <!-- ========================================== -->
+    <ion-card class="summary-card">
+      <ion-card-content>
+        <div class="summary-header">
+          <div class="summary-title">
+            <ion-icon name="shield-checkmark-outline"></ion-icon>
+            <span>Estado de Cumplimiento</span>
+          </div>
+          <span class="compliance-percent">{{ documentSummary()?.compliancePercent }}%</span>
+        </div>
+
+        <ion-progress-bar 
+          [value]="complianceProgress()" 
+          [color]="complianceProgress() >= 0.8 ? 'success' : complianceProgress() >= 0.5 ? 'warning' : 'danger'"
+          class="compliance-bar"
+        ></ion-progress-bar>
+
+        <div class="summary-stats">
+          <div class="stat-item stat-valid">
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+            <span class="stat-count">{{ documentSummary()?.validCount }}</span>
+            <span class="stat-label">Vigentes</span>
+          </div>
+          <div class="stat-item stat-warning">
+            <ion-icon name="warning-outline"></ion-icon>
+            <span class="stat-count">{{ documentSummary()?.expiringSoonCount }}</span>
+            <span class="stat-label">Por Vencer</span>
+          </div>
+          <div class="stat-item stat-expired">
+            <ion-icon name="alert-circle-outline"></ion-icon>
+            <span class="stat-count">{{ documentSummary()?.expiredCount }}</span>
+            <span class="stat-label">Vencidos</span>
+          </div>
+        </div>
+
+        @if (documentSummary()?.nextToExpire) {
+          <div class="next-expiring">
+            <ion-icon name="time-outline" color="warning"></ion-icon>
+            <span>
+              <strong>{{ documentSummary()?.nextToExpire?.name }}</strong> 
+              vence en {{ documentSummary()?.nextToExpire?.daysUntilExpiration }} días
+            </span>
+          </div>
+        }
+      </ion-card-content>
+    </ion-card>
+
+    <!-- ========================================== -->
+    <!-- FILTROS -->
+    <!-- ========================================== -->
+    <div class="filter-section">
+      <ion-segment [value]="selectedFilter()" (ionChange)="onFilterChange($event)" class="filter-segment">
+        <ion-segment-button value="all">
+          <ion-label>Todos</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="valid">
+          <ion-label>Vigentes</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="expiring">
+          <ion-label>Por Vencer</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="expired">
+          <ion-label>Vencidos</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- LISTA DE DOCUMENTOS -->
+    <!-- ========================================== -->
+    <ion-list class="documents-list" lines="none">
+      @for (doc of filteredDocuments(); track doc.id) {
+        <ion-card 
+          class="document-card" 
+          [ngClass]="getStatusBorderClass(doc.status)"
+          button="true"
+          (click)="openDocument(doc)"
+        >
+          <ion-card-content class="document-content">
+            <div class="document-icon">
+              <ion-icon [name]="typeIcons[doc.documentType]"></ion-icon>
+            </div>
+
+            <div class="document-info">
+              <h3 class="document-name">{{ doc.name }}</h3>
+              <p class="document-number">{{ doc.documentNumber }}</p>
+              <div class="document-meta">
+                <ion-chip 
+                  [color]="statusColors[doc.status]" 
+                  class="status-chip"
+                >
+                  <ion-icon [name]="getStatusIcon(doc.status)"></ion-icon>
+                  <ion-label>{{ statusNames[doc.status] }}</ion-label>
+                </ion-chip>
+              </div>
+            </div>
+
+            <div class="document-expiry">
+              <span 
+                class="expiry-text"
+                [class.expired]="doc.daysUntilExpiration < 0"
+                [class.warning]="doc.daysUntilExpiration >= 0 && doc.daysUntilExpiration <= 30"
+              >
+                {{ formatDaysRemaining(doc.daysUntilExpiration) }}
+              </span>
+              <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon>
+            </div>
+          </ion-card-content>
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-card>
+      } @empty {
+        <div class="empty-state">
+          <ion-icon name="document-text-outline"></ion-icon>
+          <p>No hay documentos en esta categoría</p>
+        </div>
+      }
+    </ion-list>
+
+    <!-- Espacio para el FAB -->
+    <div class="fab-spacer"></div>
+  }
+
+  <!-- ========================================== -->
+  <!-- FAB - AGREGAR DOCUMENTO -->
+  <!-- ========================================== -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button color="primary" (click)="openUploadOptions()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
