@@ -6,7 +6,7 @@
 ![Ionic](https://img.shields.io/badge/Ionic-7.8.0-blue.svg)
 ![Angular](https://img.shields.io/badge/Angular-17.3.0-red.svg)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.4.0-blue.svg)
-![License](https://img.shields.io/badge/license-Proprietary-orange.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
 
 **Aplicación móvil híbrida premium para la gestión integral de operadores de tractocamiones**
 
@@ -106,8 +106,8 @@ npm install -g @ionic/cli @angular/cli
 
 ```bash
 # Clonar repositorio
-git clone https://github.com/MiguelMata-25/tc.pio.git
-cd tc.pio/app
+git clone https://github.com/JorgeMataSaucedo/tc-pio-app.git
+cd tc-pio-app/app
 
 # Instalar dependencias
 npm install
@@ -347,7 +347,7 @@ Para más información sobre el proyecto:
 
 - **Email**: desarrollo@transportescuauhtemoc.com
 - **Documentación Interna**: [Confluence](https://tc-internal.atlassian.net)
-- **Repository**: [GitHub](https://github.com/MiguelMata-25/tc.pio)
+- **Repository**: [GitHub](https://github.com/JorgeMataSaucedo/tc-pio-app)
 
 ---
 
