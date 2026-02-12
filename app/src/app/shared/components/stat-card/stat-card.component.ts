@@ -45,6 +45,13 @@ import { IonCard, IonCardContent, IonIcon, IonRippleEffect } from '@ionic/angula
 
       &.clickable {
         cursor: pointer;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+
+        &:hover {
+           transform: translateY(-5px) perspective(1000px) rotateX(2deg) rotateY(-2deg);
+           box-shadow: var(--spio-shadow-lg);
+           z-index: 10;
+        }
       }
     }
 

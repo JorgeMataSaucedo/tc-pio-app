@@ -267,8 +267,7 @@ export class DashboardPage implements OnInit {
    * Abre la página de notificaciones
    */
   openNotifications(): void {
-    // TODO: Implementar página de notificaciones
-    console.log('Abrir notificaciones');
+    this.router.navigate(['/tabs/notifications']);
   }
 
   /**

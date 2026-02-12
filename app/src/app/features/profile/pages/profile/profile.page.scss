@@ -27,7 +27,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: 
+    background-image:
       radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.1) 2px, transparent 2px),
       radial-gradient(circle at 90% 30%, rgba(255, 255, 255, 0.08) 2px, transparent 2px),
       radial-gradient(circle at 30% 80%, rgba(255, 255, 255, 0.12) 1px, transparent 1px),
@@ -61,13 +61,13 @@
     background-size: 200% 200%;
     animation: headerGradient 10s ease infinite;
   }
-  
+
   &.gradient-platinum {
     background: linear-gradient(135deg, #E8EAF6 0%, #9FA8DA 25%, #7986CB 50%, #5C6BC0 75%, #7986CB 100%);
     background-size: 200% 200%;
     animation: headerGradient 8s ease infinite;
   }
-  
+
   &.gradient-diamond {
     background: linear-gradient(135deg, #E3F2FD 0%, #90CAF9 25%, #42A5F5 50%, #1E88E5 75%, #42A5F5 100%);
     background-size: 200% 200%;
@@ -76,9 +76,17 @@
 }
 
 @keyframes headerGradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .header-overlay {
@@ -87,7 +95,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at top, rgba(255,255,255,0.1) 0%, transparent 70%);
+  background: radial-gradient(circle at top, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
 }
 
 .header-content {
@@ -105,7 +113,7 @@
   width: 110px;
   height: 110px;
   border: 4px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 
+  box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.3),
     0 0 0 8px rgba(255, 255, 255, 0.1);
   animation: avatarPop 0.6s ease-out forwards;
@@ -122,9 +130,11 @@
     opacity: 0;
     transform: scale(0.5);
   }
+
   60% {
     transform: scale(1.05);
   }
+
   100% {
     opacity: 1;
     transform: scale(1);
@@ -135,7 +145,7 @@
   position: absolute;
   bottom: -4px;
   right: -4px;
-  --background: #ffffff;
+  --background: var(--ion-card-background, #ffffff);
   --color: var(--ion-color-primary);
   --border-radius: 50%;
   --padding-start: 8px;
@@ -214,10 +224,10 @@
 .stats-card {
   margin: -20px var(--spio-spacing-md) var(--spio-spacing-md);
   border-radius: var(--spio-border-radius-lg);
-  box-shadow: 
+  box-shadow:
     0 15px 40px rgba(0, 0, 0, 0.15),
     0 0 0 1px rgba(0, 0, 0, 0.02);
-  --background: #ffffff;
+  --background: var(--ion-card-background, #ffffff);
   position: relative;
   z-index: 10;
   animation: statsSlideUp 0.5s ease-out 0.2s forwards;
@@ -244,7 +254,7 @@
   padding: var(--spio-spacing-sm);
   border-radius: var(--spio-border-radius-sm);
   transition: background 0.2s ease, transform 0.2s ease;
-  
+
   &:hover {
     background: var(--spio-background-secondary);
     transform: scale(1.05);
@@ -288,7 +298,7 @@
   margin: 0 var(--spio-spacing-md) var(--spio-spacing-md);
   border-radius: var(--spio-border-radius);
   box-shadow: var(--spio-shadow-sm);
-  --background: #ffffff;
+  --background: var(--ion-card-background, #ffffff);
 }
 
 .info-row {
@@ -323,6 +333,122 @@
 }
 
 // ============================================
+// THEME CARD
+// ============================================
+
+.theme-card {
+  margin: 0 var(--spio-spacing-md) var(--spio-spacing-md);
+  border-radius: var(--spio-border-radius);
+  box-shadow: var(--spio-shadow-sm);
+  --background: var(--ion-card-background, #ffffff);
+  animation: statsSlideUp 0.5s ease-out 0.25s forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.theme-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spio-spacing-md);
+}
+
+.theme-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--spio-border-radius-sm);
+  background: linear-gradient(135deg, #7C4DFF, #536DFE);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: var(--spio-spacing-md);
+
+  ion-icon {
+    font-size: 24px;
+    color: #ffffff;
+  }
+}
+
+.theme-info {
+  flex: 1;
+
+  h3 {
+    font-size: var(--spio-font-size-md);
+    font-weight: 600;
+    color: var(--spio-text-primary);
+    margin: 0;
+  }
+
+  p {
+    font-size: var(--spio-font-size-sm);
+    color: var(--spio-text-secondary);
+    margin: 4px 0 0;
+  }
+}
+
+.theme-selector-container {
+  display: flex;
+  background: var(--spio-background-secondary, #F5F5F5);
+  padding: 4px;
+  border-radius: var(--spio-border-radius);
+  gap: 4px;
+}
+
+.theme-chip {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 12px 8px;
+  border-radius: var(--spio-border-radius-sm);
+  color: var(--spio-text-secondary);
+  font-size: var(--spio-font-size-sm);
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  ion-icon {
+    font-size: 22px;
+    margin-bottom: 2px;
+  }
+
+  span {
+    font-size: 11px;
+    letter-spacing: 0.3px;
+  }
+
+  &.active {
+    background: var(--ion-color-primary);
+    color: var(--ion-color-primary-contrast);
+    font-weight: 600;
+    box-shadow: var(--spio-shadow-sm);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:hover:not(.active) {
+    background: rgba(0, 0, 0, 0.03);
+  }
+}
+
+// Dark mode adjustments para theme card selector
+:host-context(.ion-palette-dark) {
+  .theme-selector-container {
+    background: var(--spio-background-secondary, #1A1A1A);
+  }
+
+  .theme-chip {
+    &:hover:not(.active) {
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
+}
+
+// ============================================
 // MENU LIST
 // ============================================
 
@@ -332,7 +458,7 @@
 }
 
 .menu-item {
-  --background: #ffffff;
+  --background: var(--ion-card-background, #ffffff);
   --padding-start: var(--spio-spacing-md);
   --padding-end: var(--spio-spacing-md);
   --padding-top: var(--spio-spacing-md);
@@ -346,14 +472,14 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   animation: menuSlideIn 0.4s ease-out forwards;
   opacity: 0;
-  
+
   // Stagger animation
   @for $i from 1 through 10 {
     &:nth-child(#{$i}) {
       animation-delay: #{0.3 + ($i * 0.05)}s;
     }
   }
-  
+
   &:hover {
     transform: translateX(4px);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
@@ -377,7 +503,7 @@
     color: var(--spio-text-muted);
     transition: transform 0.2s ease;
   }
-  
+
   &:hover .chevron {
     transform: translateX(4px);
   }
@@ -386,7 +512,7 @@
     h3 {
       color: var(--ion-color-danger);
     }
-    
+
     &:hover {
       background: rgba(211, 47, 47, 0.05);
     }
@@ -398,6 +524,7 @@
     opacity: 0;
     transform: translateX(-15px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);

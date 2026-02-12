@@ -1,0 +1,44 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-button (click)="goBack()">
+                <ion-icon name="chevron-back-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Notificaciones</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="notifications-content">
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    @if (notifications().length > 0) {
+    <ion-list lines="none" class="notifications-list">
+        @for (note of notifications(); track note.id) {
+        <ion-item class="notification-item" [class.unread]="!note.read" button (click)="markAsRead(note.id)">
+            <div class="icon-container" [class]="note.type" slot="start">
+                <ion-icon [name]="note.icon"></ion-icon>
+            </div>
+            <ion-label>
+                <div class="notification-header">
+                    <h3>{{ note.title }}</h3>
+                    <ion-note class="date-note">{{ note.date | date:'shortTime' }}</ion-note>
+                </div>
+                <p>{{ note.message }}</p>
+            </ion-label>
+            @if (!note.read) {
+            <div class="unread-dot" slot="end"></div>
+            }
+        </ion-item>
+        }
+    </ion-list>
+    } @else {
+    <div class="empty-state">
+        <ion-icon name="notifications-off-outline"></ion-icon>
+        <h3>No tienes notificaciones</h3>
+        <p>Estás al día con todo.</p>
+    </div>
+    }
+</ion-content>

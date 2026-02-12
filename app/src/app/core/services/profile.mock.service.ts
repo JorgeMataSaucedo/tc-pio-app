@@ -35,7 +35,7 @@ export class ProfileMockService {
   readonly operatorBasicInfo = computed(() => {
     const operator = this.authService.currentOperator();
     if (!operator) return null;
-    
+
     return {
       id: operator.id,
       employeeNumber: operator.employeeNumber,
@@ -111,7 +111,7 @@ export class ProfileMockService {
         title: 'Notificaciones',
         subtitle: 'Configurar alertas',
         icon: 'notifications-outline',
-        route: '/tabs/profile/notifications',
+        route: '/tabs/notifications',
         iconColor: 'secondary',
       },
       {

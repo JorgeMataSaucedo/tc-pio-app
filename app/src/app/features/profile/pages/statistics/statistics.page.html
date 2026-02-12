@@ -1,0 +1,100 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/profile" text="" icon="chevron-back-outline"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Estadísticas</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="statistics-content">
+    <!-- Period Selector -->
+    <div class="period-selector">
+        <ion-segment [value]="selectedPeriod" (ionChange)="onPeriodChange($event)" mode="ios">
+            <ion-segment-button value="week">
+                <ion-label>Semana</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="month">
+                <ion-label>Mes</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="year">
+                <ion-label>Año</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+    </div>
+
+    <!-- Performance Chart Placeholder -->
+    <ion-card class="chart-card">
+        <ion-card-header>
+            <ion-card-subtitle>Rendimiento</ion-card-subtitle>
+            <ion-card-title>Eficiencia de Combustible</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <div class="chart-placeholder">
+                <div class="bar" style="height: 60%"></div>
+                <div class="bar" style="height: 80%"></div>
+                <div class="bar" style="height: 50%"></div>
+                <div class="bar" style="height: 90%"></div>
+                <div class="bar" style="height: 70%"></div>
+                <div class="bar" style="height: 85%"></div>
+                <div class="bar" style="height: 65%"></div>
+            </div>
+            <div class="chart-labels">
+                <span>Lun</span>
+                <span>Mar</span>
+                <span>Mié</span>
+                <span>Jue</span>
+                <span>Vie</span>
+                <span>Sáb</span>
+                <span>Dom</span>
+            </div>
+        </ion-card-content>
+    </ion-card>
+
+    <!-- Key Metrics Grid -->
+    <div class="metrics-grid">
+        <ion-card class="metric-card">
+            <ion-card-content>
+                <div class="icon-box"
+                    style="background: rgba(var(--ion-color-success-rgb), 0.1); color: var(--ion-color-success);">
+                    <ion-icon name="checkmark-circle-outline"></ion-icon>
+                </div>
+                <div class="metric-value">98%</div>
+                <div class="metric-label">Entregas a Tiempo</div>
+            </ion-card-content>
+        </ion-card>
+
+        <ion-card class="metric-card">
+            <ion-card-content>
+                <div class="icon-box"
+                    style="background: rgba(var(--ion-color-warning-rgb), 0.1); color: var(--ion-color-warning);">
+                    <ion-icon name="alert-circle-outline"></ion-icon>
+                </div>
+                <div class="metric-value">0</div>
+                <div class="metric-label">Incidentes</div>
+            </ion-card-content>
+        </ion-card>
+
+        <ion-card class="metric-card">
+            <ion-card-content>
+                <div class="icon-box"
+                    style="background: rgba(var(--ion-color-tertiary-rgb), 0.1); color: var(--ion-color-tertiary);">
+                    <ion-icon name="speedometer-outline"></ion-icon>
+                </div>
+                <div class="metric-value">85</div>
+                <div class="metric-label">Puntaje de Conducción</div>
+            </ion-card-content>
+        </ion-card>
+
+        <ion-card class="metric-card">
+            <ion-card-content>
+                <div class="icon-box"
+                    style="background: rgba(var(--ion-color-danger-rgb), 0.1); color: var(--ion-color-danger);">
+                    <ion-icon name="warning-outline"></ion-icon>
+                </div>
+                <div class="metric-value">2</div>
+                <div class="metric-label">Frenadas Bruscas</div>
+            </ion-card-content>
+        </ion-card>
+    </div>
+</ion-content>

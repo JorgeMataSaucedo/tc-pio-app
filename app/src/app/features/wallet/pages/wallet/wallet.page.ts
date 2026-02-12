@@ -1,5 +1,6 @@
-import { Component, OnInit, inject, signal, computed, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, inject, signal, computed, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import {
   IonHeader,
   IonToolbar,
@@ -73,6 +74,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
+    FormsModule,
     DatePipe,
     DecimalPipe,
     IonHeader,
@@ -109,6 +111,7 @@ import {
 export class WalletPage implements OnInit {
   private readonly walletService = inject(WalletMockService);
   private readonly modalCtrl = inject(ModalController);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   /** Estados */
   isLoading = signal<boolean>(true);
@@ -118,7 +121,7 @@ export class WalletPage implements OnInit {
   /** Datos */
   walletSummary = signal<IWalletSummary | null>(null);
   transactions = signal<IWalletTransaction[]>([]);
-  
+
   /** Filtros */
   selectedFilter = signal<'all' | 'income' | 'expense'>('all');
   currentPage = signal<number>(1);
@@ -245,10 +248,10 @@ export class WalletPage implements OnInit {
   }
 
   /**
-   * Maneja el cambio de filtro
+   * Cambia el filtro activo
    */
-  onFilterChange(event: CustomEvent): void {
-    this.selectedFilter.set(event.detail.value);
+  setFilter(filter: 'all' | 'income' | 'expense'): void {
+    this.selectedFilter.set(filter);
     this.loadTransactions(true);
   }
 
@@ -306,7 +309,7 @@ export class WalletPage implements OnInit {
     if (diffDays === 0) return 'Hoy';
     if (diffDays === 1) return 'Ayer';
     if (diffDays < 7) return `Hace ${diffDays} días`;
-    
+
     return date.toLocaleDateString('es-MX', {
       day: 'numeric',
       month: 'short',

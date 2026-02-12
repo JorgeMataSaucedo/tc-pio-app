@@ -23,6 +23,8 @@ import {
   IonProgressBar,
   IonRippleEffect,
   IonNote,
+  IonSegment,
+  IonSegmentButton,
   AlertController,
   LoadingController,
 } from '@ionic/angular/standalone';
@@ -49,18 +51,21 @@ import {
   settingsOutline,
   createOutline,
   cameraOutline,
+  sunnyOutline,
+  moonOutline,
+  phonePortraitOutline,
+  contrastOutline,
 } from 'ionicons/icons';
 
 import { ProfileMockService } from '../../../../core/services/profile.mock.service';
 import { AuthMockService } from '../../../../core/services/auth.mock.service';
+import { ThemeService, ThemeMode, THEME_OPTIONS } from '../../../../core/services/theme.service';
 import {
   IOperatorProfileExtended,
   IProfileMenuOption,
-  RARITY_COLORS,
 } from '../../../../models/profile.model';
 import {
   OperatorLevel,
-  LEVEL_DISPLAY_NAMES,
   LEVEL_GRADIENT_CLASSES,
 } from '../../../../models/auth.model';
 
@@ -95,6 +100,8 @@ import {
     IonProgressBar,
     IonRippleEffect,
     IonNote,
+    IonSegment,
+    IonSegmentButton,
   ],
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
@@ -105,20 +112,25 @@ export class ProfilePage implements OnInit {
   private readonly authService = inject(AuthMockService);
   private readonly alertCtrl = inject(AlertController);
   private readonly loadingCtrl = inject(LoadingController);
+  readonly themeService = inject(ThemeService);
 
   /** Estados */
   isLoading = signal<boolean>(true);
-  
+
   /** Datos */
   profile = signal<IOperatorProfileExtended | null>(null);
   menuOptions = signal<IProfileMenuOption[]>([]);
 
+  /** Tema */
+  themeOptions = THEME_OPTIONS;
+  currentTheme = this.themeService.userPreference;
+
   /** Computed: Información básica */
   basicInfo = computed(() => this.profile()?.basic);
-  
+
   /** Computed: Información de empleo */
   employmentInfo = computed(() => this.profile()?.employment);
-  
+
   /** Computed: Gamificación */
   gamificationStats = computed(() => this.profile()?.gamification);
 
@@ -158,6 +170,10 @@ export class ProfilePage implements OnInit {
       settingsOutline,
       createOutline,
       cameraOutline,
+      sunnyOutline,
+      moonOutline,
+      phonePortraitOutline,
+      contrastOutline,
     });
   }
 
@@ -268,5 +284,12 @@ export class ProfilePage implements OnInit {
    */
   formatNumber(value: number): string {
     return value.toLocaleString('es-MX');
+  }
+
+  /**
+   * Cambia el tema de la aplicación
+   */
+  setTheme(theme: ThemeMode): void {
+    this.themeService.setThemePreference(theme);
   }
 }

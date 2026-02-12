@@ -1,0 +1,63 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/profile" text="" icon="chevron-back-outline"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Mis Logros</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="achievements-content">
+    <!-- Summary Header -->
+    <div class="summary-header">
+        <div class="progress-circle">
+            <div class="inner-circle">
+                <span class="percent">{{ progressPercent() | percent:'1.0-0' }}</span>
+                <span class="label">Completado</span>
+            </div>
+            <svg viewBox="0 0 36 36" class="circular-chart">
+                <path class="circle-bg"
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                <path class="circle" [attr.stroke-dasharray]="(progressPercent() * 100) + ', 100'"
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+            </svg>
+        </div>
+        <div class="stats-text">
+            <h2>{{ unlockedCount() }} / {{ totalCount() }}</h2>
+            <p>Logros desbloqueados</p>
+            <ion-badge color="warning">Nivel Oro</ion-badge>
+        </div>
+    </div>
+
+    <div class="achievements-grid">
+        <h3 class="section-title">Trofeos</h3>
+
+        <ion-grid>
+            <ion-row>
+                @for (ach of achievements(); track ach.id) {
+                <ion-col size="6" size-md="4">
+                    <div class="achievement-card" [class.locked]="!ach.isUnlocked">
+                        <div class="icon-wrapper" [class]="ach.rarity">
+                            @if (ach.isUnlocked) {
+                            <ion-icon [name]="ach.icon"></ion-icon>
+                            } @else {
+                            <ion-icon name="lock-closed-outline"></ion-icon>
+                            }
+                        </div>
+                        <div class="content">
+                            <h4>{{ ach.name }}</h4>
+                            <p>{{ ach.description }}</p>
+                            @if (ach.isUnlocked) {
+                            <span class="points">+{{ ach.points }} pts</span>
+                            } @else {
+                            <ion-progress-bar [value]="ach.progress / 100"></ion-progress-bar>
+                            <span class="progress-text">{{ ach.progress }}%</span>
+                            }
+                        </div>
+                    </div>
+                </ion-col>
+                }
+            </ion-row>
+        </ion-grid>
+    </div>
+</ion-content>

@@ -9,131 +9,84 @@
     <!-- Logo y título -->
     <div class="login-header animate-slide-up">
       <div class="logo-container">
-        <img
-          src="assets/images/logo-tc-white.svg"
-          alt="Transportes Cuauhtémoc"
-          class="company-logo"
-          (error)="$any($event).target.src='assets/images/logo-placeholder.svg'"
-        />
+        <img src="assets/images/tc-logo-custom.jpg" alt="Transportes Cuauhtémoc" class="company-logo"
+          (error)="$any($event).target.src='assets/images/logo-placeholder.svg'" />
       </div>
       <h1 class="app-title">SPIO</h1>
       <p class="app-subtitle">Sistema de Gestión para Operadores</p>
     </div>
 
     <!-- Formulario de login -->
-    <form
-      [formGroup]="loginForm"
-      (ngSubmit)="onSubmit()"
-      class="login-form animate-slide-up"
-    >
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form animate-slide-up">
       <!-- Campo de usuario -->
       <div class="form-field">
-        <ion-item
-          class="login-input"
-          [class.input-error]="hasError('username', 'required') || hasError('username', 'minlength')"
-        >
+        <ion-item class="login-input"
+          [class.input-error]="hasError('username', 'required') || hasError('username', 'minlength')">
           <ion-icon name="person-outline" slot="start" class="input-icon"></ion-icon>
-          <ion-input
-            formControlName="username"
-            type="text"
-            label="Número de Empleado"
-            labelPlacement="floating"
-            placeholder="Ej: TC-2024-0142"
-            autocomplete="username"
-            [clearInput]="true"
-          ></ion-input>
+          <ion-input formControlName="username" type="text" label="Número de Empleado" labelPlacement="floating"
+            placeholder="Ej: TC-2024-0142" autocomplete="username" [clearInput]="true"></ion-input>
         </ion-item>
-        
+
         <!-- Mensajes de error para usuario -->
         @if (hasError('username', 'required')) {
-          <ion-text color="danger" class="error-message">
-            <small>El número de empleado es requerido</small>
-          </ion-text>
+        <ion-text color="danger" class="error-message">
+          <small>El número de empleado es requerido</small>
+        </ion-text>
         }
         @if (hasError('username', 'minlength')) {
-          <ion-text color="danger" class="error-message">
-            <small>Debe tener al menos 5 caracteres</small>
-          </ion-text>
+        <ion-text color="danger" class="error-message">
+          <small>Debe tener al menos 5 caracteres</small>
+        </ion-text>
         }
       </div>
 
       <!-- Campo de contraseña -->
       <div class="form-field">
-        <ion-item
-          class="login-input"
-          [class.input-error]="hasError('password', 'required') || hasError('password', 'minlength')"
-        >
+        <ion-item class="login-input"
+          [class.input-error]="hasError('password', 'required') || hasError('password', 'minlength')">
           <ion-icon name="lock-closed-outline" slot="start" class="input-icon"></ion-icon>
-          <ion-input
-            formControlName="password"
-            [type]="showPassword ? 'text' : 'password'"
-            label="Contraseña"
-            labelPlacement="floating"
-            placeholder="Ingresa tu contraseña"
-            autocomplete="current-password"
-          ></ion-input>
-          <ion-button
-            fill="clear"
-            slot="end"
-            type="button"
-            (click)="togglePasswordVisibility()"
-            class="password-toggle"
-          >
-            <ion-icon
-              [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
-              slot="icon-only"
-            ></ion-icon>
+          <ion-input formControlName="password" [type]="showPassword ? 'text' : 'password'" label="Contraseña"
+            labelPlacement="floating" placeholder="Ingresa tu contraseña" autocomplete="current-password"></ion-input>
+          <ion-button fill="clear" slot="end" type="button" (click)="togglePasswordVisibility()"
+            class="password-toggle">
+            <ion-icon [name]="showPassword ? 'eye-off-outline' : 'eye-outline'" slot="icon-only"></ion-icon>
           </ion-button>
         </ion-item>
-        
+
         <!-- Mensajes de error para contraseña -->
         @if (hasError('password', 'required')) {
-          <ion-text color="danger" class="error-message">
-            <small>La contraseña es requerida</small>
-          </ion-text>
+        <ion-text color="danger" class="error-message">
+          <small>La contraseña es requerida</small>
+        </ion-text>
         }
         @if (hasError('password', 'minlength')) {
-          <ion-text color="danger" class="error-message">
-            <small>Debe tener al menos 6 caracteres</small>
-          </ion-text>
+        <ion-text color="danger" class="error-message">
+          <small>Debe tener al menos 6 caracteres</small>
+        </ion-text>
         }
       </div>
 
       <!-- Recordar sesión -->
       <div class="remember-me">
-        <ion-checkbox
-          formControlName="rememberMe"
-          labelPlacement="end"
-          class="remember-checkbox"
-        >
+        <ion-checkbox formControlName="rememberMe" labelPlacement="end" class="remember-checkbox">
           <span class="remember-label">Recordar mi sesión</span>
         </ion-checkbox>
       </div>
 
       <!-- Botón de login -->
-      <ion-button
-        type="submit"
-        expand="block"
-        class="login-button spio-btn-primary"
-        [disabled]="isLoading"
-      >
+      <ion-button type="submit" expand="block" class="login-button spio-btn-primary" [disabled]="isLoading">
         @if (isLoading) {
-          <ion-spinner name="crescent" class="button-spinner"></ion-spinner>
-          <span>Verificando...</span>
+        <ion-spinner name="crescent" class="button-spinner"></ion-spinner>
+        <span>Verificando...</span>
         } @else {
-          <ion-icon name="log-in-outline" slot="start"></ion-icon>
-          <span>Iniciar Sesión</span>
+        <ion-icon name="log-in-outline" slot="start"></ion-icon>
+        <span>Iniciar Sesión</span>
         }
       </ion-button>
 
       <!-- Enlace de ayuda -->
       <div class="help-section">
-        <ion-button
-          fill="clear"
-          size="small"
-          class="help-button"
-          (click)="showDemoCredentials()"
-        >
+        <ion-button fill="clear" size="small" class="help-button" (click)="showDemoCredentials()">
           <ion-icon name="information-circle-outline" slot="start"></ion-icon>
           Ver credenciales de demostración
         </ion-button>

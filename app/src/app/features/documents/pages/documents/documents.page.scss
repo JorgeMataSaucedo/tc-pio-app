@@ -14,14 +14,14 @@
 .summary-card {
   margin: var(--spio-spacing-md);
   border-radius: var(--spio-border-radius-lg);
-  box-shadow: 
+  box-shadow:
     0 10px 40px rgba(0, 0, 0, 0.1),
     0 0 0 1px rgba(0, 0, 0, 0.02);
-  --background: #ffffff;
+  --background: var(--ion-card-background, #ffffff);
   position: relative;
   overflow: hidden;
   animation: summarySlideIn 0.5s ease-out forwards;
-  
+
   // Gradiente decorativo superior
   &::before {
     content: '';
@@ -30,14 +30,13 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, 
-      var(--spio-status-ok) 0%, 
-      var(--spio-status-ok) 33%, 
-      var(--spio-status-warning) 33%, 
-      var(--spio-status-warning) 66%, 
-      var(--spio-status-expired) 66%, 
-      var(--spio-status-expired) 100%
-    );
+    background: linear-gradient(90deg,
+        var(--spio-status-ok) 0%,
+        var(--spio-status-ok) 33%,
+        var(--spio-status-warning) 33%,
+        var(--spio-status-warning) 66%,
+        var(--spio-status-expired) 66%,
+        var(--spio-status-expired) 100%);
   }
 }
 
@@ -46,6 +45,7 @@
     opacity: 0;
     transform: translateY(-15px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -86,9 +86,11 @@
     opacity: 0;
     transform: scale(0.5);
   }
+
   70% {
     transform: scale(1.1);
   }
+
   100% {
     opacity: 1;
     transform: scale(1);
@@ -101,7 +103,7 @@
   margin-bottom: var(--spio-spacing-lg);
   --buffer-background: transparent;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-  
+
   &::part(progress) {
     transition: width 1s ease-out;
   }
@@ -123,7 +125,7 @@
   padding: var(--spio-spacing-sm);
   border-radius: var(--spio-border-radius-sm);
   transition: background 0.2s ease;
-  
+
   &:hover {
     background: var(--spio-background-secondary);
   }
@@ -132,7 +134,7 @@
     font-size: 28px;
     transition: transform 0.3s ease;
   }
-  
+
   &:hover ion-icon {
     transform: scale(1.15);
   }
@@ -155,8 +157,15 @@
 }
 
 @keyframes expiredPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
 }
 
 .stat-count {
@@ -198,21 +207,41 @@
   padding: 0 var(--spio-spacing-md) var(--spio-spacing-md);
 }
 
-.filter-segment {
-  --background: #ffffff;
+.filter-container {
+  display: flex;
+  background: var(--ion-card-background, #ffffff);
+  padding: 4px;
   border-radius: var(--spio-border-radius);
   box-shadow: var(--spio-shadow-sm);
+  gap: 4px;
+  overflow-x: auto;
+  /* Allow scrolling if needed on small screens */
+}
 
-  ion-segment-button {
-    --indicator-color: var(--ion-color-primary);
-    --color: var(--spio-text-secondary);
-    --color-checked: var(--ion-color-primary);
-    font-size: var(--spio-font-size-xs);
-    font-weight: 500;
-    text-transform: none;
-    min-height: 40px;
-    --padding-start: 8px;
-    --padding-end: 8px;
+.filter-chip {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 8px 4px;
+  /* Reduced padding for 4 items */
+  border-radius: var(--spio-border-radius-sm);
+  color: var(--spio-text-secondary);
+  font-size: var(--spio-font-size-xs);
+  /* Smaller font for 4 items */
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &.active {
+    background: var(--ion-color-primary);
+    color: var(--ion-color-primary-contrast);
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(var(--ion-color-primary-rgb), 0.3);
+  }
+
+  &:active {
+    transform: scale(0.98);
   }
 }
 
@@ -229,20 +258,20 @@
   margin: 0 0 var(--spio-spacing-sm);
   border-radius: var(--spio-border-radius);
   box-shadow: var(--spio-shadow-sm);
-  --background: #ffffff;
+  --background: var(--ion-card-background, #ffffff);
   position: relative;
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   animation: docSlideIn 0.4s ease-out forwards;
   opacity: 0;
-  
+
   // Stagger animation
   @for $i from 1 through 15 {
     &:nth-child(#{$i}) {
       animation-delay: #{$i * 0.05}s;
     }
   }
-  
+
   &:hover {
     transform: translateX(4px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
@@ -258,7 +287,7 @@
     width: 5px;
     transition: width 0.2s ease;
   }
-  
+
   &:hover::before {
     width: 7px;
   }
@@ -287,6 +316,7 @@
     opacity: 0;
     transform: translateX(-15px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -294,13 +324,27 @@
 }
 
 @keyframes warningGlow {
-  0%, 100% { box-shadow: 0 0 5px rgba(245, 124, 0, 0.3); }
-  50% { box-shadow: 0 0 15px rgba(245, 124, 0, 0.5); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 5px rgba(245, 124, 0, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 15px rgba(245, 124, 0, 0.5);
+  }
 }
 
 @keyframes expiredGlow {
-  0%, 100% { box-shadow: 0 0 5px rgba(211, 47, 47, 0.4); }
-  50% { box-shadow: 0 0 20px rgba(211, 47, 47, 0.6); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 5px rgba(211, 47, 47, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 20px rgba(211, 47, 47, 0.6);
+  }
 }
 
 .document-content {
@@ -445,12 +489,12 @@ ion-fab-button {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   animation: fabBounceIn 0.5s ease-out 0.5s forwards;
   opacity: 0;
-  
+
   &:hover {
     transform: scale(1.1);
     --box-shadow: 0 8px 28px rgba(183, 28, 28, 0.55);
   }
-  
+
   &:active {
     transform: scale(0.95);
   }
@@ -461,9 +505,11 @@ ion-fab-button {
     opacity: 0;
     transform: scale(0) rotate(-180deg);
   }
+
   60% {
     transform: scale(1.15) rotate(10deg);
   }
+
   100% {
     opacity: 1;
     transform: scale(1) rotate(0);

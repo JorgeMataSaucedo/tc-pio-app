@@ -113,11 +113,11 @@ export class DocumentsPage implements OnInit {
 
   /** Estados */
   isLoading = signal<boolean>(true);
-  
+
   /** Datos */
   documentSummary = signal<IDocumentSummary | null>(null);
   documents = signal<IOperatorDocument[]>([]);
-  
+
   /** Filtro actual */
   selectedFilter = signal<DocumentFilterSegment>('all');
 
@@ -132,8 +132,8 @@ export class DocumentsPage implements OnInit {
       case 'expiring':
         return docs.filter(d => d.status === DocumentStatus.ExpiringSoon);
       case 'expired':
-        return docs.filter(d => 
-          d.status === DocumentStatus.Expired || 
+        return docs.filter(d =>
+          d.status === DocumentStatus.Expired ||
           d.status === DocumentStatus.Rejected
         );
       default:
@@ -209,10 +209,10 @@ export class DocumentsPage implements OnInit {
   }
 
   /**
-   * Maneja el cambio de filtro
+   * Cambia el filtro activo
    */
-  onFilterChange(event: CustomEvent): void {
-    this.selectedFilter.set(event.detail.value as DocumentFilterSegment);
+  setFilter(filter: DocumentFilterSegment): void {
+    this.selectedFilter.set(filter);
   }
 
   /**

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import {
@@ -193,7 +193,7 @@ export class LoginPage implements OnInit {
    */
   async showDemoCredentials(): Promise<void> {
     const credentials = this.authService.getDemoCredentials();
-    
+
     const alert = await this.alertCtrl.create({
       header: 'Credenciales de Demostración',
       message: `
@@ -267,5 +267,18 @@ export class LoginPage implements OnInit {
   hasError(controlName: string, errorType: string): boolean {
     const control = this.loginForm.get(controlName);
     return control?.hasError(errorType) && control?.touched || false;
+  }
+  /**
+   * Efecto Parallax para el fondo
+   */
+  @HostListener('document:mousemove', ['$event'])
+  onMouseMove(event: MouseEvent) {
+    const moveX = (event.clientX / window.innerWidth) * 15 - 7.5;
+    const moveY = (event.clientY / window.innerHeight) * 15 - 7.5;
+
+    const bg = document.querySelector('.login-background') as HTMLElement;
+    if (bg) {
+      bg.style.transform = `scale(1.1) translate(${moveX * -1}px, ${moveY * -1}px)`;
+    }
   }
 }

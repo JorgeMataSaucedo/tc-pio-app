@@ -1,0 +1,147 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/profile" text="" icon="chevron-back-outline"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Información Personal</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="personal-info-content">
+    @if (profile()) {
+    <!-- Header / Avatar -->
+    <div class="user-header">
+        <ion-avatar>
+            <img [src]="basicInfo()?.avatarUrl" alt="Avatar" />
+        </ion-avatar>
+        <h2>{{ basicInfo()?.fullName }}</h2>
+        <p class="role-badge">{{ employmentInfo()?.role }}</p>
+    </div>
+
+    <!-- Basic Info Card -->
+    <ion-card class="info-card">
+        <ion-card-content>
+            <h3 class="card-title">Datos Generales</h3>
+
+            <ion-list lines="none">
+                <ion-item>
+                    <ion-icon name="id-card-outline" slot="start" color="primary"></ion-icon>
+                    <ion-label>
+                        <h3>N° Empleado</h3>
+                        <p>{{ basicInfo()?.employeeNumber }}</p>
+                    </ion-label>
+                </ion-item>
+
+                <ion-item>
+                    <ion-icon name="calendar-outline" slot="start" color="primary"></ion-icon>
+                    <ion-label>
+                        <h3>Fecha de Nacimiento</h3>
+                        <p>{{ basicInfo()?.birthDate | date:'longDate' }}</p>
+                    </ion-label>
+                </ion-item>
+
+                <ion-item>
+                    <ion-icon name="shield-checkmark-outline" slot="start" color="primary"></ion-icon>
+                    <ion-label>
+                        <h3>RFC</h3>
+                        <p>{{ basicInfo()?.rfc }}</p>
+                    </ion-label>
+                </ion-item>
+
+                <ion-item>
+                    <ion-icon name="shield-checkmark-outline" slot="start" color="primary"></ion-icon>
+                    <ion-label>
+                        <h3>CURP</h3>
+                        <p>{{ basicInfo()?.curp }}</p>
+                    </ion-label>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+
+    <!-- Employment Info Card -->
+    <ion-card class="info-card">
+        <ion-card-content>
+            <h3 class="card-title">Información Laboral</h3>
+
+            <ion-list lines="none">
+                <ion-item>
+                    <ion-icon name="calendar-outline" slot="start" color="secondary"></ion-icon>
+                    <ion-label>
+                        <h3>Fecha de Ingreso</h3>
+                        <p>{{ employmentInfo()?.hireDate | date:'longDate' }}</p>
+                    </ion-label>
+                </ion-item>
+
+                <ion-item>
+                    <ion-icon name="briefcase-outline" slot="start" color="secondary"></ion-icon>
+                    <ion-label>
+                        <h3>Antigüedad</h3>
+                        <p>{{ employmentInfo()?.seniority }}</p>
+                    </ion-label>
+                </ion-item>
+
+                <ion-item>
+                    <ion-icon name="bus-outline" slot="start" color="secondary"></ion-icon>
+                    <ion-label>
+                        <h3>Unidad Asignada</h3>
+                        <p>{{ employmentInfo()?.assignedUnit }}</p>
+                        <p class="sub-detail">{{ employmentInfo()?.unitPlate }}</p>
+                    </ion-label>
+                </ion-item>
+
+                <ion-item>
+                    <ion-icon name="id-card-outline" slot="start" color="secondary"></ion-icon>
+                    <ion-label>
+                        <h3>Licencia Federal</h3>
+                        <p>{{ employmentInfo()?.federalLicenseNumber }}</p>
+                    </ion-label>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+
+    <!-- Contact Info Card -->
+    <ion-card class="info-card">
+        <ion-card-content>
+            <h3 class="card-title">Contacto</h3>
+
+            <ion-list lines="none">
+                <ion-item>
+                    <ion-icon name="mail-outline" slot="start" color="tertiary"></ion-icon>
+                    <ion-label>
+                        <h3>Correo Electrónico</h3>
+                        <p>{{ contactInfo()?.email }}</p>
+                    </ion-label>
+                </ion-item>
+
+                <ion-item>
+                    <ion-icon name="call-outline" slot="start" color="tertiary"></ion-icon>
+                    <ion-label>
+                        <h3>Teléfono</h3>
+                        <p>{{ contactInfo()?.phone }}</p>
+                    </ion-label>
+                </ion-item>
+
+                <ion-item>
+                    <ion-icon name="home-outline" slot="start" color="tertiary"></ion-icon>
+                    <ion-label>
+                        <h3>Dirección</h3>
+                        <p>{{ contactInfo()?.address }}</p>
+                        <p class="sub-detail">{{ contactInfo()?.city }}, {{ contactInfo()?.state }}</p>
+                    </ion-label>
+                </ion-item>
+
+                <ion-item>
+                    <ion-icon name="warning-outline" slot="start" color="danger"></ion-icon>
+                    <ion-label>
+                        <h3>Contacto de Emergencia</h3>
+                        <p>{{ contactInfo()?.emergencyContact }}</p>
+                        <p class="sub-detail">{{ contactInfo()?.emergencyPhone }}</p>
+                    </ion-label>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+    }
+</ion-content>

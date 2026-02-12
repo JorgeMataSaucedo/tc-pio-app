@@ -1,0 +1,143 @@
+.statistics-content {
+    --background: var(--spio-background-secondary);
+}
+
+ion-segment {
+    padding: 0 16px 8px;
+    --background: rgba(255, 255, 255, 0.2);
+
+    ion-segment-button {
+        --color: rgba(255, 255, 255, 0.7);
+        --color-checked: #fff;
+        --indicator-color: rgba(255, 255, 255, 0.3);
+    }
+}
+
+.stat-card {
+    margin: 16px;
+    border-radius: var(--spio-border-radius);
+    background: var(--ion-card-background, #fff);
+    box-shadow: var(--spio-shadow-md);
+
+    .card-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        color: var(--spio-text-secondary);
+        margin-bottom: 8px;
+    }
+
+    .main-stat {
+        font-size: 36px;
+        font-weight: 700;
+        color: var(--spio-text-primary);
+    }
+
+    .sub-stat {
+        font-size: 14px;
+        margin-bottom: 16px;
+
+        &.text-success {
+            color: var(--ion-color-success);
+        }
+    }
+
+    .chart-placeholder {
+        height: 120px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        padding-top: 20px;
+
+        .bar {
+            width: 8%; // Reduced width for better spacing
+            background: var(--ion-color-primary); // Make visible
+            opacity: 0.8;
+            border-radius: 4px;
+            transition: height 0.5s ease;
+
+            &.active {
+                opacity: 1;
+                box-shadow: 0 0 8px var(--ion-color-primary);
+            }
+        }
+    }
+
+    .chart-labels {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 12px;
+        color: var(--spio-text-secondary);
+        font-size: 11px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 0 16px 16px;
+
+    .metric-box {
+        background: var(--ion-card-background, #fff);
+        padding: 16px;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: var(--spio-shadow-sm);
+
+        ion-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+            background: var(--spio-background-secondary);
+            padding: 6px;
+            border-radius: 8px;
+        }
+
+        .label {
+            font-size: 12px;
+            color: var(--spio-text-muted);
+            margin-bottom: 2px;
+        }
+
+        .value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--spio-text-primary);
+        }
+
+        .trend {
+            font-size: 11px;
+            margin-top: 4px;
+
+            &.up {
+                color: var(--ion-color-success);
+            }
+
+            &.down {
+                color: var(--ion-color-danger);
+            }
+
+            &.flat {
+                color: var(--spio-text-secondary);
+            }
+        }
+    }
+}
+
+.section-title {
+    padding: 0 16px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--spio-text-primary);
+    margin-bottom: 8px;
+}
+
+.list-value {
+    font-weight: 700;
+    color: var(--spio-text-primary);
+}

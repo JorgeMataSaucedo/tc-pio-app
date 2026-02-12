@@ -101,7 +101,7 @@ ion-header {
   margin: var(--spio-spacing-md);
   border-radius: var(--spio-border-radius-lg);
   overflow: hidden;
-  box-shadow: 
+  box-shadow:
     0 20px 40px rgba(0, 0, 0, 0.2),
     0 0 0 1px rgba(255, 255, 255, 0.1);
   position: relative;
@@ -115,7 +115,7 @@ ion-header {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: 
+    background-image:
       radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.15) 1px, transparent 1px),
       radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
       radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.12) 1px, transparent 1px),
@@ -136,6 +136,86 @@ ion-header {
     height: 100%;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
     pointer-events: none;
+  }
+
+  // Partículas flotantes (Elementos Reales)
+  .particles-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .particle-item {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    animation: floatParticle 10s infinite linear;
+
+    &:nth-child(1) {
+      left: 10%;
+      top: 90%;
+      animation-duration: 12s;
+      animation-delay: 0s;
+    }
+
+    &:nth-child(2) {
+      left: 30%;
+      top: 95%;
+      animation-duration: 15s;
+      animation-delay: 1s;
+      width: 6px;
+      height: 6px;
+    }
+
+    &:nth-child(3) {
+      left: 50%;
+      top: 85%;
+      animation-duration: 10s;
+      animation-delay: 2s;
+    }
+
+    &:nth-child(4) {
+      left: 70%;
+      top: 90%;
+      animation-duration: 14s;
+      animation-delay: 0.5s;
+      width: 3px;
+      height: 3px;
+    }
+
+    &:nth-child(5) {
+      left: 90%;
+      top: 95%;
+      animation-duration: 11s;
+      animation-delay: 3s;
+    }
+  }
+
+  @keyframes floatParticle {
+    0% {
+      transform: translateY(0) translateX(0);
+      opacity: 0;
+    }
+
+    10% {
+      opacity: 1;
+    }
+
+    90% {
+      opacity: 1;
+    }
+
+    100% {
+      transform: translateY(-300px) translateX(20px);
+      opacity: 0;
+    }
   }
 
   // Gradientes según nivel con animación
@@ -179,9 +259,17 @@ ion-header {
 }
 
 @keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes fadeInUp {
@@ -189,6 +277,7 @@ ion-header {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -277,6 +366,7 @@ ion-header {
     opacity: 0;
     transform: translateY(15px) scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -349,10 +439,13 @@ ion-header {
 }
 
 @keyframes flamePulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
     filter: drop-shadow(0 0 2px #FF6D00);
   }
+
   50% {
     transform: scale(1.15);
     filter: drop-shadow(0 0 8px #FF6D00);
@@ -399,26 +492,20 @@ ion-header {
   margin: var(--spio-spacing-xs);
   border-radius: var(--spio-border-radius);
   box-shadow: var(--spio-shadow-sm);
-  --background: #ffffff;
+  --background: var(--ion-card-background, #ffffff);
   position: relative;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  animation: fadeInUp 0.4s ease-out forwards;
-  opacity: 0;
-  
-  // Stagger animation para cada card
-  &:nth-child(1) { animation-delay: 0.1s; }
-  &:nth-child(2) { animation-delay: 0.2s; }
-  &:nth-child(3) { animation-delay: 0.3s; }
-  &:nth-child(4) { animation-delay: 0.4s; }
-  
-  &:hover, &:focus {
+  animation: fadeInUp 0.4s ease-out both;
+
+  &:hover,
+  &:focus {
     transform: translateY(-4px) scale(1.02);
-    box-shadow: 
+    box-shadow:
       0 12px 28px rgba(0, 0, 0, 0.12),
       0 0 0 1px rgba(0, 0, 0, 0.05);
   }
-  
+
   &:active {
     transform: translateY(-2px) scale(1.01);
   }
@@ -514,26 +601,37 @@ ion-header {
   margin: var(--spio-spacing-sm) 0;
   border-radius: var(--spio-border-radius);
   box-shadow: var(--spio-shadow-sm);
-  --background: #ffffff;
+  --background: var(--ion-card-background, #ffffff);
   position: relative;
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  animation: fadeInUp 0.4s ease-out forwards;
-  opacity: 0;
-  
+  animation: fadeInUp 0.4s ease-out both;
+
   // Stagger animation
-  &:nth-child(1) { animation-delay: 0.5s; }
-  &:nth-child(2) { animation-delay: 0.6s; }
-  &:nth-child(3) { animation-delay: 0.7s; }
-  &:nth-child(4) { animation-delay: 0.8s; }
-  
-  &:hover, &:focus {
+  &:nth-child(1) {
+    animation-delay: 0.05s;
+  }
+
+  &:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 0.15s;
+  }
+
+  &:nth-child(4) {
+    animation-delay: 0.2s;
+  }
+
+  &:hover,
+  &:focus {
     transform: translateX(4px);
-    box-shadow: 
+    box-shadow:
       0 8px 20px rgba(0, 0, 0, 0.1),
       0 0 0 1px rgba(0, 0, 0, 0.03);
   }
-  
+
   &:active {
     transform: translateX(2px);
   }
@@ -548,7 +646,7 @@ ion-header {
     width: 4px;
     transition: width 0.2s ease;
   }
-  
+
   &:hover::before {
     width: 6px;
   }

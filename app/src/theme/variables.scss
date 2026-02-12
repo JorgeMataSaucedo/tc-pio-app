@@ -1,29 +1,31 @@
 /**
  * SPIO - Transportes Cuauhtémoc
- * Variables de tema corporativo
+ * Variables de tema corporativo PREMIUM
  * 
- * Paleta Oficial:
- * - Rojo Institucional: #B71C1C (primary)
+ * Paleta Oficial TC:
+ * - Amarillo TC: #FFC107 (primary)
+ * - Negro Premium: #0D0D0D
+ * - Cyan Accent: #00E5FF
  * - Blanco: #FFFFFF
  * - Grises Neutros: #F5F5F5, #E0E0E0, #9E9E9E, #424242
- * - Dorado Gamificación: #FFB300 (accent)
  */
 
 :root {
   // ============================================
   // COLORES PRIMARIOS - TRANSPORTES CUAUHTÉMOC
+  // Amarillo TC Premium
   // ============================================
   
-  --ion-color-primary: #B71C1C;
-  --ion-color-primary-rgb: 183, 28, 28;
-  --ion-color-primary-contrast: #ffffff;
-  --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #a11919;
-  --ion-color-primary-tint: #be3333;
+  --ion-color-primary: #FFC107;
+  --ion-color-primary-rgb: 255, 193, 7;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-contrast-rgb: 0, 0, 0;
+  --ion-color-primary-shade: #e0a800;
+  --ion-color-primary-tint: #ffca28;
 
   // Variante más oscura para hover/active states
-  --ion-color-primary-dark: #7f0000;
-  --ion-color-primary-light: #e53935;
+  --ion-color-primary-dark: #FF8F00;
+  --ion-color-primary-light: #FFD54F;
 
   // ============================================
   // SECUNDARIO - GRISES CORPORATIVOS
@@ -203,12 +205,177 @@
 }
 
 // ============================================
-// MODO OSCURO (Futuro)
+// MODO OSCURO PREMIUM - TRANSPORTES CUAUHTÉMOC
 // ============================================
+// Paleta custom diseñada para mantener identidad
+// corporativa con experiencia premium nocturna
 
-@media (prefers-color-scheme: dark) {
-  /*
-   * Dark Mode deshabilitado por ahora.
-   * Descomentar cuando se implemente soporte dark mode.
-   */
+.ion-palette-dark {
+  // ==========================================
+  // FONDOS - Negro profundo premium
+  // ==========================================
+  --ion-background-color: #0D0D0D;
+  --ion-background-color-rgb: 13, 13, 13;
+  
+  --ion-item-background: #0D0D0D;
+  --ion-card-background: #1A1A1A;
+  --ion-toolbar-background: #0D0D0D;
+  
+  // ==========================================
+  // TEXTOS - Blancos con jerarquía
+  // ==========================================
+  --ion-text-color: #FFFFFF;
+  --ion-text-color-rgb: 255, 255, 255;
+  
+  // ==========================================
+  // PRIMARY - Amarillo TC Premium para dark
+  // ==========================================
+  --ion-color-primary: #FFC107;
+  --ion-color-primary-rgb: 255, 193, 7;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-contrast-rgb: 0, 0, 0;
+  --ion-color-primary-shade: #e0a800;
+  --ion-color-primary-tint: #ffca28;
+  
+  --ion-color-primary-dark: #FF8F00;
+  --ion-color-primary-light: #FFD54F;
+  
+  // ==========================================
+  // SECONDARY - Grises claros para dark
+  // ==========================================
+  --ion-color-secondary: #E0E0E0;
+  --ion-color-secondary-rgb: 224, 224, 224;
+  --ion-color-secondary-contrast: #000000;
+  --ion-color-secondary-contrast-rgb: 0, 0, 0;
+  --ion-color-secondary-shade: #C5C5C5;
+  --ion-color-secondary-tint: #E3E3E3;
+  
+  // ==========================================
+  // TERTIARY - Gris medio para dark
+  // ==========================================
+  --ion-color-tertiary: #B0B0B0;
+  --ion-color-tertiary-rgb: 176, 176, 176;
+  --ion-color-tertiary-contrast: #000000;
+  --ion-color-tertiary-contrast-rgb: 0, 0, 0;
+  --ion-color-tertiary-shade: #9B9B9B;
+  --ion-color-tertiary-tint: #B8B8B8;
+  
+  // ==========================================
+  // SUCCESS - Verde vibrante para dark
+  // ==========================================
+  --ion-color-success: #4CAF50;
+  --ion-color-success-rgb: 76, 175, 80;
+  --ion-color-success-contrast: #000000;
+  --ion-color-success-contrast-rgb: 0, 0, 0;
+  --ion-color-success-shade: #439A46;
+  --ion-color-success-tint: #5EB762;
+  
+  // ==========================================
+  // WARNING - Dorado brillante
+  // ==========================================
+  --ion-color-warning: #FFC107;
+  --ion-color-warning-rgb: 255, 193, 7;
+  --ion-color-warning-contrast: #000000;
+  --ion-color-warning-contrast-rgb: 0, 0, 0;
+  --ion-color-warning-shade: #E0AA06;
+  --ion-color-warning-tint: #FFC720;
+  
+  // ==========================================
+  // DANGER - Rojo vibrante
+  // ==========================================
+  --ion-color-danger: #FF5252;
+  --ion-color-danger-rgb: 255, 82, 82;
+  --ion-color-danger-contrast: #FFFFFF;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #E04848;
+  --ion-color-danger-tint: #FF6363;
+  
+  // ==========================================
+  // NEUTRALES
+  // ==========================================
+  --ion-color-light: #2A2A2A;
+  --ion-color-light-rgb: 42, 42, 42;
+  --ion-color-light-contrast: #FFFFFF;
+  --ion-color-light-contrast-rgb: 255, 255, 255;
+  --ion-color-light-shade: #252525;
+  --ion-color-light-tint: #3F3F3F;
+  
+  --ion-color-medium: #808080;
+  --ion-color-medium-rgb: 128, 128, 128;
+  --ion-color-medium-contrast: #FFFFFF;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #717171;
+  --ion-color-medium-tint: #8D8D8D;
+  
+  --ion-color-dark: #F5F5F5;
+  --ion-color-dark-rgb: 245, 245, 245;
+  --ion-color-dark-contrast: #000000;
+  --ion-color-dark-contrast-rgb: 0, 0, 0;
+  --ion-color-dark-shade: #D8D8D8;
+  --ion-color-dark-tint: #F7F7F7;
+  
+  // ==========================================
+  // GOLD - Dorado gamificación (más brillante)
+  // ==========================================
+  --ion-color-gold: #FFD54F;
+  --ion-color-gold-rgb: 255, 213, 79;
+  --ion-color-gold-contrast: #000000;
+  --ion-color-gold-contrast-rgb: 0, 0, 0;
+  --ion-color-gold-shade: #E0BB45;
+  --ion-color-gold-tint: #FFD961;
+  
+  // ==========================================
+  // VARIABLES SPIO DARK
+  // ==========================================
+  
+  // Fondos
+  --spio-background-primary: #0D0D0D;
+  --spio-background-secondary: #1A1A1A;
+  --spio-background-dark: #000000;
+  --spio-background-elevated: #242424;
+  
+  // Textos
+  --spio-text-primary: #FFFFFF;
+  --spio-text-secondary: #B0B0B0;
+  --spio-text-light: #FFFFFF;
+  --spio-text-muted: #707070;
+  
+  // Bordes
+  --spio-border-color: #333333;
+  
+  // Sombras (más sutiles en dark)
+  --spio-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --spio-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --spio-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  
+  // Estados de documentos (más vibrantes)
+  --spio-status-ok: #4CAF50;
+  --spio-status-warning: #FF9800;
+  --spio-status-expired: #FF5252;
+  
+  // Wallet
+  --spio-income: #4CAF50;
+  --spio-expense: #FF5252;
+  
+  // ==========================================
+  // IONIC OVERRIDES ESPECÍFICOS
+  // ==========================================
+  
+  // Toolbar - Negro con texto blanco en dark mode
+  --ion-toolbar-background: #0D0D0D;
+  --ion-toolbar-color: #FFFFFF;
+  
+  // Tab bar
+  --ion-tab-bar-background: #1A1A1A;
+  --ion-tab-bar-color: #707070;
+  --ion-tab-bar-color-selected: #FFC107;
+  
+  // Inputs
+  --ion-placeholder-color: #707070;
+  
+  // Dividers
+  --ion-border-color: #333333;
+  
+  // Refresher
+  --ion-refresher-background: #1A1A1A;
 }

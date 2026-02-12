@@ -7,172 +7,190 @@
 <ion-content class="profile-content">
   <!-- Pull to refresh -->
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
-    <ion-refresher-content
-      pullingIcon="chevron-down-circle-outline"
-      pullingText="Tira para actualizar"
-      refreshingSpinner="crescent"
-    ></ion-refresher-content>
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="Tira para actualizar"
+      refreshingSpinner="crescent"></ion-refresher-content>
   </ion-refresher>
 
   @if (isLoading()) {
-    <!-- Skeleton Loading -->
-    <div class="skeleton-container">
-      <div class="profile-header-skeleton">
-        <ion-skeleton-text [animated]="true" style="width: 100px; height: 100px; border-radius: 50%;"></ion-skeleton-text>
-        <ion-skeleton-text [animated]="true" style="width: 60%; height: 24px; margin-top: 16px;"></ion-skeleton-text>
-        <ion-skeleton-text [animated]="true" style="width: 40%; height: 16px; margin-top: 8px;"></ion-skeleton-text>
-      </div>
+  <!-- Skeleton Loading -->
+  <div class="skeleton-container">
+    <div class="profile-header-skeleton">
+      <ion-skeleton-text [animated]="true" style="width: 100px; height: 100px; border-radius: 50%;"></ion-skeleton-text>
+      <ion-skeleton-text [animated]="true" style="width: 60%; height: 24px; margin-top: 16px;"></ion-skeleton-text>
+      <ion-skeleton-text [animated]="true" style="width: 40%; height: 16px; margin-top: 8px;"></ion-skeleton-text>
     </div>
+  </div>
   } @else {
-    <!-- ========================================== -->
-    <!-- HEADER DEL PERFIL -->
-    <!-- ========================================== -->
-    <div class="profile-header" [ngClass]="levelGradientClass()">
-      <div class="header-overlay"></div>
-      <div class="header-content">
-        <!-- Avatar -->
-        <div class="avatar-container">
-          <ion-avatar class="profile-avatar">
-            <img [src]="basicInfo()?.avatarUrl" alt="Avatar" />
-          </ion-avatar>
-          <ion-button fill="clear" class="edit-avatar-btn" (click)="editProfilePhoto()">
-            <ion-icon name="camera-outline" slot="icon-only"></ion-icon>
-          </ion-button>
+  <!-- ========================================== -->
+  <!-- HEADER DEL PERFIL -->
+  <!-- ========================================== -->
+  <div class="profile-header" [ngClass]="levelGradientClass()">
+    <div class="header-overlay"></div>
+    <div class="header-content">
+      <!-- Avatar -->
+      <div class="avatar-container">
+        <ion-avatar class="profile-avatar">
+          <img [src]="basicInfo()?.avatarUrl" alt="Avatar" />
+        </ion-avatar>
+        <ion-button fill="clear" class="edit-avatar-btn" (click)="editProfilePhoto()">
+          <ion-icon name="camera-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </div>
+
+      <!-- Nombre y cargo -->
+      <h1 class="profile-name">{{ basicInfo()?.fullName }}</h1>
+      <p class="profile-employee">{{ basicInfo()?.employeeNumber }}</p>
+
+      <!-- Badge de nivel -->
+      <div class="level-badge">
+        <ion-icon name="ribbon-outline"></ion-icon>
+        <span>{{ gamificationStats()?.levelName }}</span>
+      </div>
+
+      <!-- Stats rápidos -->
+      <div class="quick-stats">
+        <div class="quick-stat">
+          <ion-icon name="flame-outline"></ion-icon>
+          <span>{{ gamificationStats()?.currentStreak }} días</span>
         </div>
-
-        <!-- Nombre y cargo -->
-        <h1 class="profile-name">{{ basicInfo()?.fullName }}</h1>
-        <p class="profile-employee">{{ basicInfo()?.employeeNumber }}</p>
-
-        <!-- Badge de nivel -->
-        <div class="level-badge">
-          <ion-icon name="ribbon-outline"></ion-icon>
-          <span>{{ gamificationStats()?.levelName }}</span>
+        <div class="stat-separator"></div>
+        <div class="quick-stat">
+          <ion-icon name="trophy-outline"></ion-icon>
+          <span>#{{ gamificationStats()?.rankingPosition }}</span>
         </div>
-
-        <!-- Stats rápidos -->
-        <div class="quick-stats">
-          <div class="quick-stat">
-            <ion-icon name="flame-outline"></ion-icon>
-            <span>{{ gamificationStats()?.currentStreak }} días</span>
-          </div>
-          <div class="stat-separator"></div>
-          <div class="quick-stat">
-            <ion-icon name="trophy-outline"></ion-icon>
-            <span>#{{ gamificationStats()?.rankingPosition }}</span>
-          </div>
-          <div class="stat-separator"></div>
-          <div class="quick-stat">
-            <ion-icon name="star-outline"></ion-icon>
-            <span>{{ gamificationStats()?.averageRating }}</span>
-          </div>
+        <div class="stat-separator"></div>
+        <div class="quick-stat">
+          <ion-icon name="star-outline"></ion-icon>
+          <span>{{ gamificationStats()?.averageRating }}</span>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- ========================================== -->
-    <!-- CARD DE ESTADÍSTICAS -->
-    <!-- ========================================== -->
-    <ion-card class="stats-card">
-      <ion-card-content>
-        <div class="stats-grid">
-          <div class="stat-item">
-            <span class="stat-value">{{ formatNumber(gamificationStats()?.totalKilometers ?? 0) }}</span>
-            <span class="stat-label">Kilómetros</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-value">{{ gamificationStats()?.totalTrips }}</span>
-            <span class="stat-label">Viajes</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-value">{{ gamificationStats()?.achievementsUnlocked }}</span>
-            <span class="stat-label">Logros</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-value">{{ employmentInfo()?.seniorityYears }}</span>
-            <span class="stat-label">Años</span>
-          </div>
+  <!-- ========================================== -->
+  <!-- CARD DE ESTADÍSTICAS -->
+  <!-- ========================================== -->
+  <ion-card class="stats-card">
+    <ion-card-content>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-value">{{ formatNumber(gamificationStats()?.totalKilometers ?? 0) }}</span>
+          <span class="stat-label">Kilómetros</span>
         </div>
+        <div class="stat-item">
+          <span class="stat-value">{{ gamificationStats()?.totalTrips }}</span>
+          <span class="stat-label">Viajes</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">{{ gamificationStats()?.achievementsUnlocked }}</span>
+          <span class="stat-label">Logros</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">{{ employmentInfo()?.seniorityYears }}</span>
+          <span class="stat-label">Años</span>
+        </div>
+      </div>
 
-        <!-- Barra de logros -->
-        <div class="achievements-progress">
-          <div class="progress-header">
-            <span>Logros desbloqueados</span>
-            <span>{{ gamificationStats()?.achievementsUnlocked }}/{{ gamificationStats()?.totalAchievements }}</span>
-          </div>
-          <ion-progress-bar [value]="achievementProgress()" color="warning"></ion-progress-bar>
+      <!-- Barra de logros -->
+      <div class="achievements-progress">
+        <div class="progress-header">
+          <span>Logros desbloqueados</span>
+          <span>{{ gamificationStats()?.achievementsUnlocked }}/{{ gamificationStats()?.totalAchievements }}</span>
         </div>
-      </ion-card-content>
-    </ion-card>
+        <ion-progress-bar [value]="achievementProgress()" color="warning"></ion-progress-bar>
+      </div>
+    </ion-card-content>
+  </ion-card>
 
-    <!-- ========================================== -->
-    <!-- INFORMACIÓN RÁPIDA -->
-    <!-- ========================================== -->
-    <ion-card class="info-card">
-      <ion-card-content>
-        <div class="info-row">
-          <ion-icon name="briefcase-outline" color="primary"></ion-icon>
-          <div class="info-content">
-            <span class="info-label">Unidad Asignada</span>
-            <span class="info-value">{{ employmentInfo()?.assignedUnit }}</span>
-          </div>
+  <!-- ========================================== -->
+  <!-- INFORMACIÓN RÁPIDA -->
+  <!-- ========================================== -->
+  <ion-card class="info-card">
+    <ion-card-content>
+      <div class="info-row">
+        <ion-icon name="briefcase-outline" color="primary"></ion-icon>
+        <div class="info-content">
+          <span class="info-label">Unidad Asignada</span>
+          <span class="info-value">{{ employmentInfo()?.assignedUnit }}</span>
         </div>
-        <div class="info-row">
-          <ion-icon name="location-outline" color="primary"></ion-icon>
-          <div class="info-content">
-            <span class="info-label">Base Operativa</span>
-            <span class="info-value">{{ employmentInfo()?.operationalBase }}</span>
-          </div>
+      </div>
+      <div class="info-row">
+        <ion-icon name="location-outline" color="primary"></ion-icon>
+        <div class="info-content">
+          <span class="info-label">Base Operativa</span>
+          <span class="info-value">{{ employmentInfo()?.operationalBase }}</span>
         </div>
-        <div class="info-row">
-          <ion-icon name="calendar-outline" color="primary"></ion-icon>
-          <div class="info-content">
-            <span class="info-label">Antigüedad</span>
-            <span class="info-value">{{ employmentInfo()?.seniority }}</span>
-          </div>
+      </div>
+      <div class="info-row">
+        <ion-icon name="calendar-outline" color="primary"></ion-icon>
+        <div class="info-content">
+          <span class="info-label">Antigüedad</span>
+          <span class="info-value">{{ employmentInfo()?.seniority }}</span>
         </div>
-      </ion-card-content>
-    </ion-card>
+      </div>
+    </ion-card-content>
+  </ion-card>
 
-    <!-- ========================================== -->
-    <!-- MENÚ DE OPCIONES -->
-    <!-- ========================================== -->
-    <ion-list class="menu-list" lines="none">
-      @for (option of menuOptions(); track option.id) {
-        <ion-item 
-          class="menu-item" 
-          [class.destructive]="option.isDestructive"
-          button="true"
-          detail="false"
-          (click)="handleMenuAction(option)"
-        >
-          <div class="menu-icon" [attr.data-color]="option.iconColor" slot="start">
-            <ion-icon [name]="option.icon"></ion-icon>
-          </div>
-          <ion-label>
-            <h3>{{ option.title }}</h3>
-            @if (option.subtitle) {
-              <p>{{ option.subtitle }}</p>
-            }
-          </ion-label>
-          @if (option.badge) {
-            <ion-badge color="danger" slot="end">{{ option.badge }}</ion-badge>
-          }
-          @if (!option.isDestructive) {
-            <ion-icon name="chevron-forward-outline" slot="end" class="chevron"></ion-icon>
-          }
-          <ion-ripple-effect></ion-ripple-effect>
-        </ion-item>
+  <!-- ========================================== -->
+  <!-- SELECTOR DE TEMA -->
+  <!-- ========================================== -->
+  <ion-card class="theme-card">
+    <ion-card-content>
+      <div class="theme-header">
+        <div class="theme-icon">
+          <ion-icon name="contrast-outline"></ion-icon>
+        </div>
+        <div class="theme-info">
+          <h3>Apariencia</h3>
+          <p>Personaliza el tema de la aplicación</p>
+        </div>
+      </div>
+
+      <div class="theme-selector-container">
+        @for (option of themeOptions; track option.value) {
+        <button class="theme-chip" [class.active]="currentTheme() === option.value" (click)="setTheme(option.value)">
+          <ion-icon [name]="option.icon"></ion-icon>
+          <span>{{ option.label }}</span>
+        </button>
+        }
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- ========================================== -->
+  <!-- MENÚ DE OPCIONES -->
+  <!-- ========================================== -->
+  <ion-list class="menu-list" lines="none">
+    @for (option of menuOptions(); track option.id) {
+    <ion-item class="menu-item" [class.destructive]="option.isDestructive" button="true" detail="false"
+      (click)="handleMenuAction(option)">
+      <div class="menu-icon" [attr.data-color]="option.iconColor" slot="start">
+        <ion-icon [name]="option.icon"></ion-icon>
+      </div>
+      <ion-label>
+        <h3>{{ option.title }}</h3>
+        @if (option.subtitle) {
+        <p>{{ option.subtitle }}</p>
+        }
+      </ion-label>
+      @if (option.badge) {
+      <ion-badge color="danger" slot="end">{{ option.badge }}</ion-badge>
       }
-    </ion-list>
+      @if (!option.isDestructive) {
+      <ion-icon name="chevron-forward-outline" slot="end" class="chevron"></ion-icon>
+      }
+      <ion-ripple-effect></ion-ripple-effect>
+    </ion-item>
+    }
+  </ion-list>
 
-    <!-- Versión de la app -->
-    <div class="app-version">
-      <p>SPIO v1.0.0</p>
-      <p>© 2026 Transportes Cuauhtémoc</p>
-    </div>
+  <!-- Versión de la app -->
+  <div class="app-version">
+    <p>SPIO v1.0.0</p>
+    <p>© 2026 Transportes Cuauhtémoc</p>
+  </div>
 
-    <!-- Espacio inferior -->
-    <div class="bottom-spacer"></div>
+  <!-- Espacio inferior -->
+  <div class="bottom-spacer"></div>
   }
 </ion-content>
